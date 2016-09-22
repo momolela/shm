@@ -1,0 +1,14 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@include file="/commons/taglib.jsp" %>
+<c:forEach items="${[lowEntity]s}" var="[lowEntity]">
+   <tr id="tz-items-${[lowEntity].id}" data-itemcount="${page.itemCount}">
+   		<td>${[lowEntity].id}</td>
+   		<td class="tzui-key tzui-tips tmui-ellipsis">${[lowEntity].name}</td>
+    	<td class="tzui-tips" tip="添加的时间是:${[lowEntity].createTime}">${tz:formateDate([lowEntity].createTime,'yyyy年MM月dd日')}</td>
+    	<td><span data-opid="${[lowEntity].id}" data-status="${[lowEntity].status}" class="tmui-status ${[lowEntity].status==1?'green':'red'}">${[lowEntity].status==1?"发布":"未发布"}</span></td>
+   		<td>
+   			<a href="${basePath}/admin/[lowEntity]/edit?id=${[lowEntity].id}" data-opid="${[lowEntity].id}" class="edit_w">编辑</a>
+   			<a href="javascript:void(0);" data-opid="${[lowEntity].id}" onclick="tz_delete(this)">删除</a>
+   		</td>
+   </tr>
+</c:forEach>

@@ -1,0 +1,81 @@
+package com.[domainName].dao.[lowEntity].impl;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+
+import com.[domainName].core.dao.BaseDaoImpl;
+import com.[domainName].core.dao.TmParams;
+import com.[domainName].dao.[lowEntity].I[entity]Dao;
+import com.[domainName].model.[entity];
+import com.[domainName].util.TmPageInfo;
+import com.[domainName].util.TzStringUtils;
+
+/**
+ * 
+ * [description]
+ * [entity]DaoImpl
+ * 创建人:[author]
+ * 时间：[date] 
+ * @version 1.0.0
+ *
+ */
+@Repository
+@Transactional
+public class [entity]DaoImpl extends BaseDaoImpl<[entity],Integer> implements I[entity]Dao{
+	
+	/**
+	 * 
+	 * 查询所有的内容
+	 * 求总数 sql hql qbc 
+	 * 方法名：find[entity]s
+	 * 创建人：[author] 
+	 * 时间：[date] 
+	 * @param params
+	 * @param pageInfo
+	 * @return List<[entity]>
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public List<[entity]> find[entity]s(TmParams params,TmPageInfo pageInfo){
+		DetachedCriteria detachedCriteria = getCurrentDetachedCriteria();
+		if(params!=null){
+			if(TzStringUtils.isNotEmpty(params.getKeyword())){
+				detachedCriteria.add(Restrictions.like("name", params.getKeyword(),MatchMode.ANYWHERE));
+			}
+		}
+		detachedCriteria.addOrder(Order.desc("createTime"));
+		detachedCriteria.add(Restrictions.eq("isDelete",0));
+		return findByDetachedCriteria(detachedCriteria,pageInfo);
+	}
+	
+	/**
+	 * 求总数
+	 * 方法名：count[entity]
+	 * 创建人：[author] 
+	 * 时间：[date] 
+	 * @param params
+	 * @return int
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public int count[entity](TmParams params){
+		DetachedCriteria detachedCriteria = getCurrentDetachedCriteria();
+		if(params!=null){
+			if(TzStringUtils.isNotEmpty(params.getKeyword())){
+				detachedCriteria.add(Restrictions.like("name", params.getKeyword(),MatchMode.ANYWHERE));
+			}
+		}
+		detachedCriteria.setProjection(Projections.count("id"));
+		detachedCriteria.add(Restrictions.eq("isDelete",0));
+		Number number = (Number)detachedCriteria.getExecutableCriteria(getSession()).uniqueResult();
+		return number==null?0:number.intValue();
+	}
+}

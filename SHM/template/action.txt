@@ -1,0 +1,160 @@
+package com.[domainName].web.[lowEntity];
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
+import com.[domainName].core.Method;
+import com.[domainName].core.action.BaseAction;
+import com.[domainName].core.interceptor.TZRequestMethod;
+import com.[domainName].model.[entity];
+import com.[domainName].model.User;
+import com.[domainName].service.[lowEntity].I[entity]Service;
+
+/**
+ * 
+ * [description]
+ * [entity]Action
+ * 创建人:[author] 
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+@Controller("[lowEntity]Action")
+@Scope("prototype")
+public class [entity]Action extends BaseAction{
+
+	@Autowired
+	private I[entity]Service [lowEntity]Service;
+	private List<[entity]> [lowEntity]s;
+	private [entity] [lowEntity];
+	
+	
+	/**
+	 * 
+	 * 保存
+	 * 创建人：[author] 
+	 * 时间：[date]
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 * 
+	 */
+	public String list(){
+		[lowEntity]s = [lowEntity]Service.find[entity]s(params, page);
+		int itemCount = [lowEntity]Service.count[entity](params);
+		page.setItemCount(String.valueOf(itemCount));
+		return "list";
+	}
+	
+	/**
+	 * 渲染模板的方法
+	 * 方法名：listtemplate
+	 * 创建人：[author] 
+	 * 时间：[date]
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public String listTemplate(){
+		[lowEntity]s = [lowEntity]Service.find[entity]s(params, page);
+		int itemCount = [lowEntity]Service.count[entity](params);
+		page.setItemCount(String.valueOf(itemCount));
+		return "listTemplate";
+	}
+	
+	/**
+	 * 编辑方法
+	 * 方法名：edit
+	 * 创建人：[author] 
+	 * 时间：[date]
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public String edit(){
+		if(id!=null){
+			[lowEntity] = [lowEntity]Service.get(id);
+		}
+		return "edit";
+	}
+	
+	/**
+	 * 保存方法
+	 * 方法名：save
+	 * 创建人：[author] 
+	 * 时间：[date]
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@Method(method=TZRequestMethod.POST)
+	public String save(){
+		[lowEntity].setUser(new User(1));
+		[lowEntity].setStatus(1);
+		[lowEntity].setIsDelete(0);
+		[lowEntity] = [lowEntity]Service.save([lowEntity]);
+		[lowEntity].setUser(null);
+		result = "success";
+		return AJAX_SUCCESS;
+	}
+	
+	/**
+	 * 更新内容信息
+	 * 方法名：update
+	 * 创建人：[author] 
+	 * 时间：[date] 
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@Method(method=TZRequestMethod.POST)
+	public String update(){
+		[lowEntity].setUpdateTime(new Date());
+		[lowEntity] = [lowEntity]Service.updateDefault([lowEntity]);
+		[lowEntity]=null;
+		result ="success";
+		return AJAX_SUCCESS;
+	}
+	
+	/**
+	 * 删除方法
+	 * 方法名：delete
+	 * 创建人：[author] 
+	 * 时间：2015年5月13日-上午12:02:57 
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public String delete(){
+		try {
+			[lowEntity].setUpdateTime(new Date());
+			[lowEntity].setIsDelete(1);
+			[lowEntity]Service.updateDefault([lowEntity]);
+			result = "success";
+		} catch (Exception e) {
+			result = "fail";
+		}
+		return AJAX_SUCCESS;
+	}
+
+	//setter/getter
+	public [entity] get[entity]() {
+		return [lowEntity];
+	}
+
+	public void set[entity]([entity] [lowEntity]) {
+		this.[lowEntity] = [lowEntity];
+	}
+
+	public List<[entity]> get[entity]s() {
+		return [lowEntity]s;
+	}
+
+	public void set[entity]s(List<[entity]> [lowEntity]s) {
+		this.[lowEntity]s = [lowEntity]s;
+	}
+}

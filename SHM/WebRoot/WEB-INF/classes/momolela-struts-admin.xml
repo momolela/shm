@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 管理员包 -->
+	<package name="AdminPKG" namespace="/admin" extends="defaults">
+		<action name="/*/*" method="{2}" class="{1}Action">
+			<result type="json" name="ajaxSuccess">
+				<param name="ignoreHierarchy">false</param><!-- 这个属性表示是否忽略等级，也就是继承关系,设置为 false 后会将父类和子类的属性一起返回 -->
+				<param name="excludeNullProperties">true</param><!-- 这个属性表示去除空数据 -->
+			</result>
+			<result name="adminlogin">/WEB-INF/adminpage/admin_login.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 页面跳转包 -->
+	<package name="ToAdminPKG" namespace="/toadmin" extends="defaults">
+		<action name="/*/*" method="{2}" class="{1}Action">
+			<result name="adminindex">/WEB-INF/adminpage/index.jsp</result>
+			<result name="pagemanage">/WEB-INF/adminpage/pagemanage.jsp</result>
+			<result name="roommanage">/WEB-INF/adminpage/roommanage.jsp</result>
+			<result name="checkoutcenter">/WEB-INF/adminpage/checkoutcenter.jsp</result>
+			<result name="customermanage">/WEB-INF/adminpage/customermanage.jsp</result>
+			<result name="commentscenter">/WEB-INF/adminpage/commentscenter.jsp</result>
+			<result name="hotelinformation">/WEB-INF/adminpage/hotelinformation.jsp</result>
+			<interceptor-ref name="loginInterceptorAdmin"></interceptor-ref>
+			<interceptor-ref name="loadRunInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+	</package>
+	
+</struts>

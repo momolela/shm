@@ -1,0 +1,44 @@
+package com.[domainName].service.[lowEntity];
+
+import java.util.List;
+
+import com.[domainName].core.dao.TmParams;
+import com.[domainName].core.service.IBaseService;
+import com.[domainName].model.[entity];
+import com.[domainName].util.TmPageInfo;
+
+/**
+ * 
+ * [description]业务层
+ * I[entity]Service
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+public interface I[entity]Service extends IBaseService<[entity],Integer> {
+	/**
+	 * 查询所有的内容
+	 * 方法名：find[entity]s
+	 * 创建人：[author] 
+	 * 时间：[date] 
+	 * @param params
+	 * @param pageInfo
+	 * @return List<[entity]>
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public List<[entity]> find[entity]s(TmParams params,TmPageInfo pageInfo);
+	
+	/**
+	 * 求总数
+	 * 方法名：count[entity]
+	 * 创建人：[author] 
+	 * 时间：[date] 
+	 * @param params
+	 * @return int
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public int count[entity](TmParams params);
+}

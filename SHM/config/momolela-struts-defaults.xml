@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 配置一些整个项目通用和全局的配置，比如登陆，拦截器 -->
+	<package name="defaults" extends="json-default">
+		<interceptors>
+			<interceptor name="methodInterceptor" class="methodInterceptor"></interceptor>
+			<interceptor name="loginInterceptorUser" class="loginInterceptorUser"></interceptor>
+			<interceptor name="loginInterceptorAdmin" class="loginInterceptorAdmin"></interceptor>
+			<interceptor name="loadRunInterceptor" class="loadRunInterceptor"></interceptor>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="methodInterceptor"></interceptor-ref>
+				<interceptor-ref name="loginInterceptorUser"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<global-results>
+			<result name="error" type="redirect">/404.jsp</result>
+			<result name="toIndex" type="redirect">/index.jsp</result>
+			<result name="toLogin" type="redirect">/login.jsp</result>
+		</global-results>
+	</package>
+	
+	<!-- 用户包 -->
+	<package name="UserPKG" namespace="/user" extends="defaults">
+		<action name="/*/*" method="{2}" class="{1}Action">
+			<result type="json" name="ajaxSuccess">
+				<param name="ignoreHierarchy">false</param><!-- 这个属性表示是否忽略等级，也就是继承关系,设置为 false 后会将父类和子类的属性一起返回 -->
+				<param name="excludeNullProperties">true</param><!-- 这个属性表示去除空数据 -->
+			</result>
+			<result name="usersend_page">/page/usersend_page.jsp</result>
+			<!-- 跳转到后台登录页面 -->
+			<result name="adminlogin">/WEB-INF/adminpage/admin_login.jsp</result>
+			<!-- 跳转到首页 -->
+			<result name="index">/index.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 页面跳转包 -->
+	<package name="ToUserPKG" namespace="/touser" extends="defaults">
+		<action name="/*/*" method="{2}" class="{1}Action">
+			<result name="musicbox">/page/musicbox.jsp</result>
+			<result name="userpsw">/page/UserPsw.jsp</result>
+			<result name="userinfo">/page/UserInfo.jsp</result>
+			<result name="usermail">/page/UserMail.jsp</result>
+			<result name="userpic">/page/UserPic.jsp</result>
+			<interceptor-ref name="loginInterceptorUser"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<action name="musiccomments" method="toSong" class="pageAction">
+			<result name="musiccomments">/page/musiccomments.jsp</result>
+		</action>
+		<action name="pageAction" method="toMusicbox" class="pageAction">
+			<result name="musicbox">/page/musicbox.jsp</result>
+		</action>
+		<action name="uploadMusicAction" method="upload" class="uploadMusicAction">
+			<result type="chain" name="tomusicbox">pageAction</result>
+		</action>
+		<action name="sendlistAction" method="querySendlist" class="sendlistAction">
+			<result name="usersend_all">/page/usersend_all.jsp</result>
+		</action>
+		<action name="allMusicAction" method="queryAllMusic" class="allMusicAction">
+			<result name="allmusic">/page/Allmusic.jsp</result>
+		</action>
+		<action name="allMusicActionType" method="queryAllMusicByType" class="allMusicAction">
+			<result name="musicByType">/page/Allmusic.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 工具包 -->
+	<package name="UtilsPKG" namespace="/" extends="struts-default">
+		<!-- 验证码的action -->
+   		<action name="checkcode" class="checkCodeAction">
+   			<result name="success" type="stream">
+   				<param name="contentType">image/jpeg</param>  
+            	<param name="inputName">imageStream</param>  
+            	<param name="bufferSize">2048</param>
+   			</result>
+   		</action>
+   </package>
+   
+   <!-- ajax上传文件包 -->
+   <package name="ajaxUploadPKG" namespace="/ajaxupload" extends="struts-default">
+   		<action name="ajaxUploadAction/*" method="{1}" class="ajaxUploadAction">
+   			<result name="callback">/WEB-INF/adminpage/callback.jsp</result>
+   		</action>
+   </package>
+   
+</struts>
