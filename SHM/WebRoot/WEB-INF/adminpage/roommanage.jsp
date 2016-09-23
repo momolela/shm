@@ -308,6 +308,25 @@
 			</div>
 			<!-- delRoomBox end -->
 			
+			<!-- editRoomOneBox start -->
+			<div class="editRoomOneBox">
+				<div id="editRoomOneBoxHeader">
+					<span id="configContainer" style="float: left">增加客房</span>
+				</div>
+				<div id="editRoomOneBoxContent" style="overflow: hidden;position:relative;">
+					<div class="input" style="width:330px;height:60%;margin:20px auto 0 auto;">
+						<div style="width:100%;height:40px;"><span style="display:inline-block;width:80px;height:40px;font-size:15px;line-height:40px;">客房名称：</span><input type="text" style="width:237px;height:30px;padding-left:10px;" class="roomNameEdit" id="roomNameEdit"/></div>
+						<div style="width:100%;height:40px;"><span style="display:inline-block;width:80px;height:40px;font-size:15px;line-height:40px;float:left;">客房状态：</span><div style="float:left;width:237px;height:30px;margin-top:5px;" class="roomStatusEdit" id="roomStatusEdit"></div></div>
+						<div style="width:100%;height:40px;"><span style="display:inline-block;width:80px;height:40px;font-size:15px;line-height:40px;float:left;">客房类型：</span><div style="float:left;width:237px;height:30px;margin-top:5px;" class="roomStyleEdit" id="roomStyleEdit"></div></div>
+					</div>
+					<div style="position:absolute;bottom:20px;left:85px;">
+						<input type="button" value="确定" id="ooButton_editrmo" />
+						<input type="button" value="取消" id="ccButton_editrmo" style="margin-left:50px;"/>
+					</div>
+				</div>
+			</div>
+			<!-- editRoomOneBox end -->
+			
 		</div>
 		<!--end t_right-->
 
@@ -494,6 +513,35 @@
 			}
 		});
 		
+		// jqweight控件----弹出框（编辑客房单一）
+		$(".editRoomOneBox").jqxWindow({
+			isModal :true,
+			modalOpacity: 0.3,
+			theme : theme,
+			width : 380,
+			height : 240,
+			resizable : false,
+			autoOpen : false,
+			cancelButton : $('#ccButton_editrmo'),
+			okButton : $('#ooButton_editrmo'),
+			initContent : function() {
+				$('#ooButton_editrmo').jqxButton({
+					theme : theme,
+					template : "primary",
+					cursor : "pointer",
+					width : '80',
+					height : '30'
+				});
+				$('#ccButton_editrmo').jqxButton({
+					theme : theme,
+					template : "info",
+					cursor : "pointer",
+					width : '80',
+					height : '30'
+				});
+			}
+		});
+		
 		// jqweight控件----下拉框（选中客房类型）
 		$("#roomStyle").jqxDropDownList({
 			theme : theme,
@@ -504,6 +552,49 @@
 			dropDownHeight: '74',
 			displayMember: "roomStyle",
 		    valueMember: "id"
+		});
+		
+		// jqweight控件----下拉框（选中客房类型）
+		$("#roomStyleEdit").jqxDropDownList({
+			theme : theme,
+			source: null,
+			placeHolder : '请选择客房类型',
+			width: '120',
+			height: '30',
+			dropDownHeight: '74',
+			displayMember: "roomStyle",
+		    valueMember: "id"
+		});
+		
+		// jqweight控件----下拉框（选中客房状态）
+		$("#roomStatusEdit").jqxDropDownList({
+			theme : theme,
+			source: null,
+			placeHolder : '请选择客房状态',
+			width: '120',
+			height: '30',
+			dropDownHeight: '74',
+			displayMember: "roomStatusDisplay",
+		    valueMember: "roomStatusValue"
+		});
+		
+		// 加载所有的客房状态
+		$.ajax({
+			url:basePath+"/admin/roomManage/queryAllRoomStatus",
+			type: 'post',
+			success: function(data){
+				if(data.result=="success"){
+					source ={
+					datatype: "json",
+					datafields: 
+						[{ name: 'roomStatusDisplay' },
+						 { name: 'roomStatusValue' }],
+						 localdata: data.datamap.roomStatusList
+					};
+					dataAdapter = new $.jqx.dataAdapter(source);
+					$("#roomStatusEdit").jqxDropDownList({source: dataAdapter});
+				}
+			}
 		});
 		
 		// 加载所有的客房类型
@@ -521,6 +612,7 @@
 					};
 					dataAdapter = new $.jqx.dataAdapter(source);
 					$("#roomStyle").jqxDropDownList({source: dataAdapter});
+					$("#roomStyleEdit").jqxDropDownList({source: dataAdapter});
 				}
 			}
 		});
@@ -656,9 +748,14 @@
 			if(checkedRows.length == 0){
 				showInfo("请先勾选要编辑的客房~", 'warning');
 				return;
+			}else if(checkedRows.length == 1||(checkedRows.length == 2&&checkedRows[0].parentid==null)){
+				$(".editRoomOneBox").jqxWindow('open');
 			}else{
-				// $(".delRoomBox").jqxWindow('open');
+				showInfo("只能勾选一个要编辑的客房~", 'warning');
 			}
+		});
+		$("#ooButton_editrmo").click(function(){
+			alert();
 		});
 		
 		// 点击编辑客房（同类）

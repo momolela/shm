@@ -57,7 +57,7 @@ public class RoomManageAction extends BaseAction implements ServletRequestAware{
 	public String queryAllRoom(){
 		List<Room> roomList = iRoomService.queryAllRoom();
 		Map<String, Object> roomMap = null;
-		List<Map<String, Object>> roomMapList = new ArrayList<Map<String,Object>>();;
+		List<Map<String, Object>> roomMapList = new ArrayList<Map<String,Object>>();
 		for(Room room:roomList){
 			roomMap = new HashMap<String, Object>();
 			String roomPrice = room.getRoomStyle().getPrice();
@@ -174,6 +174,11 @@ public class RoomManageAction extends BaseAction implements ServletRequestAware{
 			Integer delid = Integer.parseInt(delroomid);
 			iRoomService.delRoomByid(delid);
 		}
+		result = "success";
+		return AJAX_SUCCESS;
+	}
+	
+	public String queryAllRoomStatus(){
 		result = "success";
 		return AJAX_SUCCESS;
 	}
