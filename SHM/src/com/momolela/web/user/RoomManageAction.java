@@ -62,16 +62,18 @@ public class RoomManageAction extends BaseAction implements ServletRequestAware{
 			roomMap = new HashMap<String, Object>();
 			String roomPrice = room.getRoomStyle().getPrice();
 			String roomDesc = room.getRoomStyle().getRoomDesc();
+			String roomStyleid = room.getRoomStyle().getId().toString();
 			String roomStyleName = room.getRoomStyle().getRoomStyle();
 			// 查询所有的列
 			roomMap.put("id", room.getId().toString());
 			roomMap.put("roomName", room.getRoomName());
 			roomMap.put("roomPic", room.getRoomPic());
-			roomMap.put("roomPicIcon", "<img src='../../images/admin/image/aggre2.png' width='19' height='15' style='cursor:pointer;'/>");
+			roomMap.put("roomPicIcon", "<img src='../../images/admin/image/aggre2.png' dataUrl='"+room.getRoomPic()+"' width='19' height='15' style='cursor:pointer;'/>");
 			roomMap.put("roomStatus", room.getRoomStatus());
 			roomMap.put("parentid", roomStyleName);
 			roomMap.put("roomPrice", roomPrice);
 			roomMap.put("roomDesc", roomDesc);
+			roomMap.put("roomStyleid", roomStyleid);
 			roomMap.put("roomStyleName", roomStyleName);
 			roomMap.put("expanded", true);
 			roomMapList.add(roomMap);
@@ -178,7 +180,36 @@ public class RoomManageAction extends BaseAction implements ServletRequestAware{
 		return AJAX_SUCCESS;
 	}
 	
-	public String queryAllRoomStatus(){
+	/**
+	 * 编辑客房(单一)
+	 */
+	public String editRoomOne(){
+		Integer roomId = Integer.parseInt(request.getParameter("roomId"));
+		String roomName = request.getParameter("roomNameEdit");
+		String roomStatus = request.getParameter("roomStatusEdit");
+		String roomStyle = request.getParameter("roomStyleEdit");
+		Room room = new Room();
+		room.setRoomName(roomName);
+		room.setRoomStatus(Integer.parseInt(roomStatus));
+		room.setRoomStyle(iRoomService.queryRoomStyleById(roomStyle));
+		iRoomService.updateRoomOne(room,roomId);
+		result = "success";
+		return AJAX_SUCCESS;
+	}
+	
+	/**
+	 * 编辑客房(同类)
+	 */
+	public String editRoomType(){
+		Integer roomStyleId = Integer.parseInt(request.getParameter("roomStyleId"));
+		String roomPrice = request.getParameter("roomPrice");
+		String roomDesc = request.getParameter("roomDesc");
+		String roomStyleName = request.getParameter("roomStyleName");
+		RoomStyle roomStyle = new RoomStyle();
+		roomStyle.setPrice(roomPrice);
+		roomStyle.setRoomDesc(roomDesc);
+		roomStyle.setRoomStyle(roomStyleName);
+		iRoomService.updateRoomStyle(roomStyle,roomStyleId);
 		result = "success";
 		return AJAX_SUCCESS;
 	}

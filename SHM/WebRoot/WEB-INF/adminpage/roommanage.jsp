@@ -296,7 +296,7 @@
 			<!-- delRoomBox start -->
 			<div class="delRoomBox">
 				<div id="delRoomBoxHeader">
-					<span id="configContainer" style="float: left">增加客房</span>
+					<span id="configContainer" style="float: left">删除客房</span>
 				</div>
 				<div id="delRoomBoxContent" style="overflow: hidden;position:relative;">
 					<div class="input" style="width:100%;height:30%;text-align:center;margin-top:16px;">你确定要删除选中的客房吗？？？</div>
@@ -311,7 +311,7 @@
 			<!-- editRoomOneBox start -->
 			<div class="editRoomOneBox">
 				<div id="editRoomOneBoxHeader">
-					<span id="configContainer" style="float: left">增加客房</span>
+					<span id="configContainer" style="float: left">编辑客房（单一）</span>
 				</div>
 				<div id="editRoomOneBoxContent" style="overflow: hidden;position:relative;">
 					<div class="input" style="width:330px;height:60%;margin:20px auto 0 auto;">
@@ -326,6 +326,32 @@
 				</div>
 			</div>
 			<!-- editRoomOneBox end -->
+			
+			<!-- editRoomBox start -->
+			<div class="editRoomBox">
+				<div id="editRoomBoxHeader">
+					<span id="configContainer" style="float: left">编辑客房（同类）</span>
+				</div>
+				<div id="editRoomBoxContent" style="overflow: hidden;position:relative;">
+					<div class="input" style="width:330px;height:60%;margin:20px auto 0 auto;">
+						<div style="width:100%;height:40px;"><div style="margin-left:10px;width:60px;height:40px;line-height:40px;float:left;">客房类型：</div><input class="roomStyleNameEdit" id="roomStyleNameEdit" style="padding-left:5px;margin-top:6px;width:225px;height:30px;float:left;" type="text"/></div>
+						<div style="width:100%;height:40px;margin-top:5px;"><div style="margin-left:10px;width:60px;height:40px;line-height:40px;float:left;">客房价格：</div><input class="roomPriceEdit" id="roomPriceEdit" style="padding-left:5px;margin-top:6px;width:225px;height:30px;float:left;" type="text"/></div>
+						<div style="width:100%;height:40px;margin-top:5px;"><div style="margin-left:10px;width:60px;height:40px;line-height:40px;float:left;">客房描述：</div><input class="roomDescEdit" id="roomDescEdit" style="padding-left:5px;margin-top:6px;width:225px;height:30px;float:left;" type="text"/></div>
+					</div>
+					<div style="position:absolute;bottom:20px;left:85px;">
+						<input type="button" value="确定" id="ooButton_editrm" />
+						<input type="button" value="取消" id="ccButton_editrm" style="margin-left:50px;"/>
+					</div>
+				</div>
+			</div>
+			<!-- editRoomBox end -->
+			
+			<!-- picBox start -->
+			<div class="picBox" style="background:#fff;width:600px;height:400px;position:absolute;top:50%;left:50%;margin-top:-200px;margin-left:-300px;z-index:999;box-shadow:0px 0px 10px #000;">
+			
+			</div>
+			<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:998;"></div>
+			<!-- picBox end -->
 			
 		</div>
 		<!--end t_right-->
@@ -542,6 +568,35 @@
 			}
 		});
 		
+		// jqweight控件----弹出框（编辑客房同类）
+		$(".editRoomBox").jqxWindow({
+			isModal :true,
+			modalOpacity: 0.3,
+			theme : theme,
+			width : 380,
+			height : 240,
+			resizable : false,
+			autoOpen : false,
+			cancelButton : $('#ccButton_editrm'),
+			okButton : $('#ooButton_editrm'),
+			initContent : function() {
+				$('#ooButton_editrm').jqxButton({
+					theme : theme,
+					template : "primary",
+					cursor : "pointer",
+					width : '80',
+					height : '30'
+				});
+				$('#ccButton_editrm').jqxButton({
+					theme : theme,
+					template : "info",
+					cursor : "pointer",
+					width : '80',
+					height : '30'
+				});
+			}
+		});
+		
 		// jqweight控件----下拉框（选中客房类型）
 		$("#roomStyle").jqxDropDownList({
 			theme : theme,
@@ -566,35 +621,22 @@
 		    valueMember: "id"
 		});
 		
+		var source = [
+			{"roomStatusDisplay":"未预定","roomStatusValue":"0"},
+			{"roomStatusDisplay":"被预定","roomStatusValue":"1"},
+			{"roomStatusDisplay":"已入住","roomStatusValue":"2"}
+		];
+		
 		// jqweight控件----下拉框（选中客房状态）
 		$("#roomStatusEdit").jqxDropDownList({
 			theme : theme,
-			source: null,
+			source: source,
 			placeHolder : '请选择客房状态',
 			width: '120',
 			height: '30',
 			dropDownHeight: '74',
 			displayMember: "roomStatusDisplay",
 		    valueMember: "roomStatusValue"
-		});
-		
-		// 加载所有的客房状态
-		$.ajax({
-			url:basePath+"/admin/roomManage/queryAllRoomStatus",
-			type: 'post',
-			success: function(data){
-				if(data.result=="success"){
-					source ={
-					datatype: "json",
-					datafields: 
-						[{ name: 'roomStatusDisplay' },
-						 { name: 'roomStatusValue' }],
-						 localdata: data.datamap.roomStatusList
-					};
-					dataAdapter = new $.jqx.dataAdapter(source);
-					$("#roomStatusEdit").jqxDropDownList({source: dataAdapter});
-				}
-			}
 		});
 		
 		// 加载所有的客房类型
@@ -742,6 +784,7 @@
 		}
 		
 		// 点击编辑客房（单一）
+		var roomId = "";
 		$('#editRoomOne').click(function(){
 			var checkedRows = $("#indGrid").jqxTreeGrid('getCheckedRows');
 			// 获取所有的客房的id
@@ -750,17 +793,70 @@
 				return;
 			}else if(checkedRows.length == 1||(checkedRows.length == 2&&checkedRows[0].parentid==null)){
 				$(".editRoomOneBox").jqxWindow('open');
+				console.log(checkedRows);
+				// 数据回写
+				if(checkedRows.length == 1){
+					$("#roomNameEdit").val(checkedRows[0].roomName);
+					$("#roomStatusEdit").jqxDropDownList({selectedIndex:checkedRows[0].roomStatus});
+					var item = $("#roomStyleEdit").jqxDropDownList('getItemByValue', checkedRows[0].roomStyleid);
+					$("#roomStyleEdit").jqxDropDownList('selectItem', item );
+					roomId = checkedRows[0].id;
+				}else if(checkedRows.length == 2){
+					$("#roomNameEdit").val(checkedRows[1].roomName);
+					$("#roomStatusEdit").jqxDropDownList({selectedIndex:checkedRows[1].roomStatus});
+					var item = $("#roomStyleEdit").jqxDropDownList('getItemByValue', checkedRows[1].roomStyleid);
+					$("#roomStyleEdit").jqxDropDownList('selectItem', item );
+					roomId = checkedRows[1].id;
+				}
 			}else{
 				showInfo("只能勾选一个要编辑的客房~", 'warning');
 			}
 		});
 		$("#ooButton_editrmo").click(function(){
-			alert();
+			// 获取表单数据
+			var roomNameEdit = $("#roomNameEdit").val();
+			var roomStatusEdit = $("#roomStatusEdit").jqxDropDownList("val");
+			var roomStyleEdit = $("#roomStyleEdit").jqxDropDownList("val");
+			
+			$.ajax({
+				url: basePath+"/admin/roomManage/editRoomOne",
+				data: {"roomId":roomId,"roomNameEdit":roomNameEdit,"roomStatusEdit":roomStatusEdit,"roomStyleEdit":roomStyleEdit},
+				type: 'post',
+				success: function(data){
+					window.location.reload(location);
+				}
+			});
 		});
 		
 		// 点击编辑客房（同类）
+		var roomStyleId = "";
 		$('#editRoomType').click(function(){
-			alert(5);
+			var checkedRows = $("#indGrid").jqxTreeGrid('getCheckedRows');
+			if(checkedRows.length>0&&checkedRows[0].parentid==null&&(checkedRows[1].parentid==checkedRows[(checkedRows.length)-1].parentid)){
+				$(".editRoomBox").jqxWindow('open');
+				// 数据回写
+				$("#roomStyleNameEdit").val(checkedRows[1].roomStyleName);
+				$("#roomPriceEdit").val(checkedRows[1].roomPrice);
+				$("#roomDescEdit").val(checkedRows[1].roomDesc);
+				roomStyleId = checkedRows[1].roomStyleid;
+			}else{
+				showInfo("请选择一类客房~","warning");
+			}
+		});
+		$("#ooButton_editrm").click(function(){
+			// 获取数据
+			var roomPrice = $("#roomPriceEdit").val();
+			var roomDesc = $("#roomDescEdit").val();
+			var roomStyleName = $("#roomStyleNameEdit").val();
+			// 向后台写入数据
+			$.ajax({
+				url: basePath+"/admin/roomManage/editRoomType",
+				data:  {"roomStyleId":roomStyleId,"roomPrice": roomPrice,"roomDesc": roomDesc,"roomStyleName":roomStyleName},
+				type: 'post',
+				success:function(data){
+					window.location.reload(location);
+				}
+			});
 		});
 	});
 
@@ -801,6 +897,9 @@
 				type : 'string'
 			}, {
 				name : 'roomStyleName',
+				type : 'string'
+			}, {
+				name : 'roomStyleid',
 				type : 'string'
 			}, {
 				name : 'roomPrice',

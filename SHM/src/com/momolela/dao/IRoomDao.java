@@ -13,4 +13,6 @@ public interface IRoomDao {
 	public RoomStyle queryRoomStyleById(String roomStyle);
 	public void addRoom(Room room);
 	public void delRoomByid(Integer delid);
+	public void updateRoomOne(Room room, Integer roomId);
+	public void updateRoomStyle(RoomStyle roomStyle, Integer roomStyleId);
 }

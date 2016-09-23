@@ -60,4 +60,12 @@ public class RoomServiceImpl implements IRoomService {
 		iRoomDao.delRoomByid(delid);
 	}
 
+	public void updateRoomOne(Room room, Integer roomId) {
+		iRoomDao.updateRoomOne(room, roomId);
+	}
+
+	public void updateRoomStyle(RoomStyle roomStyle, Integer roomStyleId) {
+		iRoomDao.updateRoomStyle(roomStyle, roomStyleId);
+	}
+
 }
