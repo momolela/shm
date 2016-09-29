@@ -245,7 +245,7 @@
 					<li>
 						<a href="${basePath }/toadmin/adminPage/toCustomerManage">
 							<i class="h_icon5"></i>
-							<span>顾客管理</span>
+							<span>用户管理</span>
 						</a>
 					</li>
 					<li>

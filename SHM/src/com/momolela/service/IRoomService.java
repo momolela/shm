@@ -3,6 +3,7 @@ package com.momolela.service;
 import java.util.List;
 
 import com.momolela.model.Room;
+import com.momolela.model.RoomPic;
 import com.momolela.model.RoomStyle;
 
 public interface IRoomService {
@@ -16,4 +17,8 @@ public interface IRoomService {
 	public void delRoomByid(Integer delid);
 	public void updateRoomOne(Room room, Integer roomId);
 	public void updateRoomStyle(RoomStyle roomStyle, Integer roomStyleId);
+	public Room queryRoomByName(String roomName);
+	public void addRoomPic(RoomPic roomPic);
+	public void delRoomPic(Integer delid);
+	public List<RoomPic> queryRoomPicByRoomId(Integer roomid);
 }

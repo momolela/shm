@@ -31,7 +31,6 @@
 				<param name="ignoreHierarchy">false</param><!-- 这个属性表示是否忽略等级，也就是继承关系,设置为 false 后会将父类和子类的属性一起返回 -->
 				<param name="excludeNullProperties">true</param><!-- 这个属性表示去除空数据 -->
 			</result>
-			<result name="usersend_page">/page/usersend_page.jsp</result>
 			<!-- 跳转到后台登录页面 -->
 			<result name="adminlogin">/WEB-INF/adminpage/admin_login.jsp</result>
 			<!-- 跳转到首页 -->

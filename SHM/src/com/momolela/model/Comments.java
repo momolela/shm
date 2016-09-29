@@ -28,6 +28,7 @@ public class Comments implements java.io.Serializable {
 	private Integer id;
 	private String comments;
 	private Date createTime;
+	private Integer status;
 	private User userId;
 	private Room roomId;
 
@@ -57,6 +58,15 @@ public class Comments implements java.io.Serializable {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	@Column(name="status")
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	@ManyToOne

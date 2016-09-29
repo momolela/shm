@@ -89,6 +89,7 @@
 	function tz_login(){
 		//为了更好的用户体验，改变按钮的背景色。
 		$(".submit_btn").css("background","#209161");
+		$(".submit_btn").val("登录中...");
 		var account = $("#account").val();
 		var password = $("#password").val();
 		var checkcode = $("#checkcode").val();

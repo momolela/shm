@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import com.momolela.core.dao.BaseDaoImpl;
 import com.momolela.dao.IRoomDao;
 import com.momolela.model.Room;
+import com.momolela.model.RoomPic;
 import com.momolela.model.RoomStyle;
 import com.momolela.model.User;
 
@@ -90,5 +91,34 @@ public class RoomDaoImpl extends BaseDaoImpl implements IRoomDao {
 		query.setString(2, roomStyle.getRoomStyle());
 		query.setInteger(3, roomStyleId);
 		query.executeUpdate();
+	}
+
+	public Room queryRoomByName(String roomName) {
+		Room room = new Room();
+		String hql = "FROM Room r WHERE r.roomName = ?";
+		Query query = getSession().createQuery(hql);
+		query.setString(0, roomName);
+		room = (Room) query.uniqueResult();
+		return room;
+	}
+
+	public void addRoomPic(RoomPic roomPic) {
+		getSession().save(roomPic);
+	}
+
+	public void delRoomPic(Integer delid) {
+		String hql = "delete From RoomPic r where r.room = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, delid);
+		query.executeUpdate();
+	}
+
+	public List<RoomPic> queryRoomPicByRoomId(Integer roomid) {
+		List<RoomPic> roomPicList = new ArrayList<RoomPic>();
+		String hql = "FROM RoomPic r WHERE r.room = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, roomid);
+		roomPicList = query.list();
+		return roomPicList;
 	}
 }

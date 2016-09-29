@@ -59,7 +59,7 @@
 			.fm_content .t_header .h_info .h_out a i{width:14px;height:14px;display:block;background:url("${basePath}/images/admin/index/ht_icon.png") no-repeat 0 -51px;float:left;margin:6px 8px;}
 
 			/*t_right start*/
-			.fm_content .t_right{background:#f3f4f5;margin-left:200px;width:100%;position:absolute;}
+			.fm_content .t_right{background:#f3f4f5;margin-left:200px;}
 
 			/*r_location start*/
 			.fm_content .t_right .r_location{height:51px;background:#e5e5e5;border-bottom:1px solid #ccc;line-height:51px;}
@@ -183,7 +183,7 @@
 					<li>
 						<a href="${basePath }/toadmin/adminPage/toCustomerManage">
 							<i class="h_icon5"></i>
-							<span>顾客管理</span>
+							<span>用户管理</span>
 						</a>
 					</li>
 					<li>

@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 
 import com.momolela.core.action.BaseAction;
 import com.momolela.model.Room;
+import com.momolela.model.RoomPic;
 import com.momolela.model.RoomStyle;
 import com.momolela.service.IRoomService;
 
@@ -67,8 +68,7 @@ public class RoomManageAction extends BaseAction implements ServletRequestAware{
 			// 查询所有的列
 			roomMap.put("id", room.getId().toString());
 			roomMap.put("roomName", room.getRoomName());
-			roomMap.put("roomPic", room.getRoomPic());
-			roomMap.put("roomPicIcon", "<img src='../../images/admin/image/aggre2.png' dataUrl='"+room.getRoomPic()+"' width='19' height='15' style='cursor:pointer;'/>");
+			roomMap.put("roomPicIcon", "<img src='../../images/admin/image/aggre2.png' class='roomPicIcon' id='roomPicIcon' onClick='roomPic(this)' roomid='"+room.getId().toString()+"' width='19' height='15' style='cursor:pointer;'/>");
 			roomMap.put("roomStatus", room.getRoomStatus());
 			roomMap.put("parentid", roomStyleName);
 			roomMap.put("roomPrice", roomPrice);
@@ -154,14 +154,22 @@ public class RoomManageAction extends BaseAction implements ServletRequestAware{
 	public String addRoom(){
 		String roomName = request.getParameter("roomName");
 		String roomStyle = request.getParameter("roomStyle");
-		String roomPicUrl = request.getParameter("roomPicUrl");
+		String urlArr[] = request.getParameterValues("urlArr");
 		Room room = new Room();
 		room.setRoomName(roomName);
 		room.setRoomStatus(0);
-		room.setRoomPic(roomPicUrl);
 		RoomStyle roomstyle = iRoomService.queryRoomStyleById(roomStyle);
 		room.setRoomStyle(roomstyle);
 		iRoomService.addRoom(room);
+		// 返回roomid
+		Room room1 = iRoomService.queryRoomByName(roomName);
+		// 往roompic表中添加记录
+		for(String url:urlArr){
+			RoomPic roomPic = new RoomPic();
+			roomPic.setRoom(room1);
+			roomPic.setRoomPic(url);
+			iRoomService.addRoomPic(roomPic);
+		}
 		result = "success";
 		return AJAX_SUCCESS;
 	}
@@ -174,6 +182,8 @@ public class RoomManageAction extends BaseAction implements ServletRequestAware{
 		String[] delRoomId = request.getParameterValues("delRoomId");
 		for(String delroomid:delRoomId){
 			Integer delid = Integer.parseInt(delroomid);
+			// 先删除roomPic表中的记录
+			iRoomService.delRoomPic(delid);
 			iRoomService.delRoomByid(delid);
 		}
 		result = "success";
@@ -210,6 +220,19 @@ public class RoomManageAction extends BaseAction implements ServletRequestAware{
 		roomStyle.setRoomDesc(roomDesc);
 		roomStyle.setRoomStyle(roomStyleName);
 		iRoomService.updateRoomStyle(roomStyle,roomStyleId);
+		result = "success";
+		return AJAX_SUCCESS;
+	}
+	
+	public String queryRoomPicByRoomId(){
+		List<String> roomPicUrl = new ArrayList<String>();
+		Integer roomid = Integer.parseInt(request.getParameter("roomid"));
+		List<RoomPic> roomPicList = iRoomService.queryRoomPicByRoomId(roomid);
+		for(RoomPic roompic :roomPicList){
+			roomPicUrl.add(roompic.getRoomPic());
+		}
+		datamap.put("roomPicUrl", roomPicUrl);
+		datamap.put("roomPicList", roomPicList);
 		result = "success";
 		return AJAX_SUCCESS;
 	}

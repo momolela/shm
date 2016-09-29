@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.momolela.dao.IRoomDao;
 import com.momolela.model.Room;
+import com.momolela.model.RoomPic;
 import com.momolela.model.RoomStyle;
 import com.momolela.service.IRoomService;
 
@@ -68,4 +69,19 @@ public class RoomServiceImpl implements IRoomService {
 		iRoomDao.updateRoomStyle(roomStyle, roomStyleId);
 	}
 
+	public Room queryRoomByName(String roomName) {
+		return iRoomDao.queryRoomByName(roomName);
+	}
+
+	public void addRoomPic(RoomPic roomPic) {
+		iRoomDao.addRoomPic(roomPic);
+	}
+
+	public void delRoomPic(Integer delid) {
+		iRoomDao.delRoomPic(delid);
+	}
+
+	public List<RoomPic> queryRoomPicByRoomId(Integer roomid) {
+		return iRoomDao.queryRoomPicByRoomId(roomid);
+	}
 }

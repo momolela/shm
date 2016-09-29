@@ -4,7 +4,7 @@
 <html >
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>顾客管理</title>
+		<title>用户管理</title>
 		<%@include file="/commons/public.jsp" %>
 		<style type="text/css">
 			body{font-size:12px;font-family:"Microsoft Yahei";color:#666;}
@@ -61,7 +61,7 @@
 			.fm_content .t_header .h_info .h_out a i{width:14px;height:14px;display:block;background:url("${basePath}/images/admin/index/ht_icon.png") no-repeat 0 -51px;float:left;margin:6px 8px;}
 
 			/*t_right start*/
-			.fm_content .t_right{background:#f3f4f5;margin-left:200px;width:100%;position:absolute;}
+			.fm_content .t_right{background:#fff;margin-left:200px;}
 
 			/*r_location start*/
 			.fm_content .t_right .r_location{height:51px;background:#e5e5e5;border-bottom:1px solid #ccc;line-height:51px;}
@@ -69,6 +69,9 @@
 
 			/*清除浮动*/
 			.clear{clear:both;}
+			
+			.all_tab:hover{background:#eee;}
+			.class_tab:hover{background:#eee;}
 
 			/*头部导航和消息提示小于1360的时候 用下边的样式*/
 			@media screen and (max-width:1360px){
@@ -185,7 +188,7 @@
 					<li>
 						<a href="#" class="h_sel">
 							<i class="h_icon5"></i>
-							<span>顾客管理</span>
+							<span>用户管理</span>
 						</a>
 					</li>
 					<li>
@@ -225,9 +228,56 @@
 			<!--r_location start-->
 			<div class="r_location">
 				<i></i>
-				<p>您当前所在位置：首页 &gt; 顾客管理</p>
+				<p>您当前所在位置：首页 &gt; 用户管理</p>
 			</div>
 			<!--end r_location-->
+			
+			<!--  -->
+			<div class="leftToolber" style="height:490px;width:94%;margin-left:30px;margin-top:20px;">
+				<div id="indGrid" style="border:1px solid #eee;"></div>
+				<div id="gridToolber" style='overflow: hidden; position: relative; height: 100%; width: 90%;'>
+					<div style='float: left; padding: 2px; margin: 2px;'>
+						<input type="button" id='addCustomer' value="前台新增顾客"/>
+					</div>
+					<div style='float: left; padding: 2px; margin: 2px;'>
+						<input type="button" id='onlyCustomer' value="只看顾客"/>
+					</div>
+					<div style='float: left; padding: 2px; margin: 2px;'>
+						<input type="button" id='onlyUser' value="只看会员"/>
+					</div>
+					<div style='float: left; padding: 2px; margin: 2px;'>
+						<input type="button" id='allUser' value="全部用户"/>
+					</div>
+					<div style='float: left; padding: 2px; margin: 2px;'>
+						<input type="button" id='updateUser' value="修改用户"/>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			
+			<!-- addCustomerBox start -->
+			<div class="addCustomerBox">
+				<div id="addCustomerBoxHeader">
+					<span id="configContainer" style="float: left">前台新增顾客</span>
+				</div>
+				<div id="addCustomerBoxContent" style="overflow: hidden;position:relative;">
+					<div class="input" style="width:330px;height:70%;margin:20px auto 0 auto;">
+						<div style="width:100%;height:40px;"><span style="display:inline-block;width:80px;height:40px;font-size:15px;line-height:40px;">真实姓名：</span><input type="text" style="width:237px;height:30px;padding-left:10px;" class="realname" id="realname"/></div>
+						<div style="width:100%;height:40px;"><span style="display:inline-block;width:80px;height:40px;font-size:15px;line-height:40px;float:left;">顾客性别：</span><div class="sex" id="sex"></div></div>
+						<div style="width:100%;height:40px;"><span style="display:inline-block;width:80px;height:40px;font-size:15px;line-height:40px;float:left;">身份证号：</span><input type="text" style="width:237px;height:30px;padding-left:10px;" class="idcard" id="idcard"/></div>
+						<div style="width:100%;height:40px;"><span style="display:inline-block;width:80px;height:40px;font-size:15px;line-height:40px;float:left;">手机号：</span><input type="text" style="width:237px;height:30px;padding-left:10px;" class="phonenum" id="phonenum"/></div>
+					</div>
+					<div style="position:absolute;bottom:20px;left:85px;">
+						<input type="button" value="确定" id="ooButton_addc" />
+						<input type="button" value="取消" id="ccButton_addc" style="margin-left:50px;"/>
+					</div>
+				</div>
+			</div>
+			<!-- addCustomerBox end -->
+			
+			<!--  -->
+			<div style="display:none;"></div>
+			<!--  -->
 			
 		</div>
 		<!--end t_right-->
@@ -235,6 +285,284 @@
 	</div>
 	
 <script type="text/javascript">
+	var userMapList;
+	$(function(){
+		$.ajax({
+			url:basePath+"/admin/userManage/findAllUser",
+			type: 'post',
+			success: function(data){
+				console.log(data);
+				if(data.result=="success"){
+					refreshTreeData(data.datamap.userMapList);
+					userMapList = data.datamap.userMapList;
+				}
+			}
+		});
+	
+		// jqweight控件----表格
+		$("#indGrid").jqxTreeGrid({
+			theme : theme,
+			width : '100%',
+			height : '100%',
+			hierarchicalCheckboxes : true,
+			columnsResize : true,
+			checkboxes : true,
+			icons : true,
+			showtoolbar : true,
+			rendertoolbar : function(toolbar) {
+				toolbar.append($('#gridToolber'));
+				$('#gridToolber input').jqxButton({
+					theme : theme,
+					cursor : "pointer",
+					width : 100,
+					height : 25,
+					textImageRelation : "imageBeforeText",
+					textPosition : "left"
+				});
+				$('#addCustomer').jqxButton({
+					width: '130',
+					imgSrc : basePath+"/images/admin/image/add.png"
+				});
+				$('#onlyCustomer').jqxButton({
+					width: '130',
+					imgSrc : basePath+"/images/admin/image/attribute_p.png"
+				});
+				$('#onlyUser').jqxButton({
+					width: '130',
+					imgSrc : basePath+"/images/admin/image/attribute_r.png"
+				});
+				$('#allUser').jqxButton({
+					width: '130',
+					imgSrc : basePath+"/images/admin/image/attribute_d.png"
+				});
+				$('#updateUser').jqxButton({
+					width: '130',
+					imgSrc : basePath+"/images/admin/image/icon-edit.png"
+				});
+			},
+			columns : [ {
+				text : '用户名',
+				datafield : 'username',
+				width : 120
+			}, {
+				text : '性别',
+				datafield : 'sex',
+				cellsalign : 'center',
+				width : 120,
+				align : 'center',
+				cellsRenderer : sexFormat
+			}, {
+				text : '真实姓名',
+				datafield : 'realname',
+				cellsalign : 'center',
+				width : 120,
+				align : 'center'
+			}, {
+				text : '身份证号',
+				datafield : 'idcard',
+				width : 180,
+				align : 'center',
+				cellsalign : 'center'
+			}, {
+				text : '手机号',
+				datafield : 'phonenum',
+				width : 100,
+				align : 'center',
+				cellsalign : 'center'
+			}, {
+				text : '身份',
+				datafield : 'status',
+				width : 100,
+				align : 'center',
+				cellsalign : 'center',
+				cellsRenderer : statusFormat
+			},{
+				text : '邮箱',
+				datafield : 'email',
+				width : 160,
+				align : 'center',
+				cellsalign : 'center',
+				cellsformat : 'c2',
+			},{
+				text : '注册时间',
+				datafield : 'createtime',
+				align : 'center',
+				cellsalign : 'center',
+				cellsformat : 'c2',
+			}]
+		});
+		
+		var dataMap = [{sexName:"男",sexValue:"m"},{sexName:"女",sexValue:"f"}];
+		var source ={
+			datatype: "json",
+			datafields: [{name:"sexName"},{name:"sexValue"}],
+			localdata: dataMap
+		};
+		var dataAdapter = new $.jqx.dataAdapter(source);
+		// 性别下拉框
+		$("#sex").jqxDropDownList({
+			theme : theme,
+			source: dataAdapter,
+			placeHolder : '请选择性别~',
+			width: '120',
+			height: '30',
+			dropDownHeight: '50',
+			displayMember: "sexName",
+		    valueMember: "sexValue"
+		});
+		
+		// jqweight控件----弹出框（添加顾客）
+		$(".addCustomerBox").jqxWindow({
+			isModal :true,
+			modalOpacity: 0.3,
+			theme : theme,
+			width : 380,
+			height : 280,
+			resizable : false,
+			autoOpen : false,
+			cancelButton : $('#ccButton_addc'),
+			okButton : $('#ooButton_addc'),
+			initContent : function() {
+				$('#ooButton_addc').jqxButton({
+					theme : theme,
+					template : "primary",
+					cursor : "pointer",
+					width : '80',
+					height : '30'
+				});
+				$('#ccButton_addc').jqxButton({
+					theme : theme,
+					template : "info",
+					cursor : "pointer",
+					width : '80',
+					height : '30'
+				});
+			}
+		});
+		$("#ooButton_addc").click(function(){
+			var realname = $("#realname").val();
+			var sex = $("#sex").val();
+			var idcard = $("#idcard").val();
+			var phonenum = $("#phonenum").val();
+			if(realname!=""&&sex!=""&&idcard!=""&&phonenum!=""){
+				$.ajax({
+					url: basePath+"/admin/userManage/addCustomer",
+					data: {"realname":realname,"sex":sex,"idcard":idcard,"phonenum":phonenum},
+					type: 'post',
+					success:function(data){
+						if(data.result=="success"){
+							window.location.reload(location);
+						}
+					}
+				});
+			}
+		});
+		
+		// 点击前台添加顾客
+		$("#addCustomer").click(function(){
+			$(".addCustomerBox").jqxWindow('open');
+		});
+		
+		// 点击只看顾客
+		$("#onlyCustomer").click(function(){
+			var userMapListCustomer = new Array();
+			for(var i = 0;i<userMapList.length;i++){
+				if(userMapList[i].status == "1"){
+					userMapListCustomer.push(userMapList[i]);
+				}
+				refreshTreeData(userMapListCustomer);
+			}
+		});
+		
+		// 点击只看会员
+		$("#onlyUser").click(function(){
+			var userMapListUser = new Array();
+			for(var i = 0;i<userMapList.length;i++){
+				if(userMapList[i].status == "0"){
+					userMapListUser.push(userMapList[i]);
+				}
+				refreshTreeData(userMapListUser);
+			}
+		});
+		
+		// 点击全部用户
+		$("#allUser").click(function(){
+			refreshTreeData(userMapList);
+		});
+		
+		// 点击修改用户
+		$("#updateUser").click(function(){
+			var checkedRows = $("#indGrid").jqxTreeGrid('getCheckedRows');
+			// 获取所有的客房的id
+			if(checkedRows.length == 0){
+				showInfo("请先勾选要修改的的用户~", 'warning');
+				return;
+			}else if(checkedRows.length == 1){
+				$(".updateUserBox").jqxWindow('open');
+			}else{
+				showInfo("请不要勾选多个用户~", 'warning');
+				return;
+			}
+		});
+	});
+	
+	function sexFormat(row, column, value, rowData) {
+		if (value == 'm') {
+			return "男";
+		} else if (value == 'f') {
+			return "女";
+		}
+	}
+	
+	function statusFormat(row, column, value, rowData) {
+		if (value == '0') {
+			return "会员";
+		} else if (value == '1') {
+			return "顾客";
+		}
+	}
+	
+	// 加载表格数据
+	function refreshTreeData(data) {
+		var source = {
+			dataType : "json",
+			dataFields : [ {
+				name : 'id',
+				type : 'string'
+			}, {
+				name : 'username',
+				type : 'string'
+			}, {
+				name : 'sex',
+				type : 'string'
+			}, {
+				name : 'realname',
+				type : 'string'
+			}, {
+				name : 'idcard',
+				type : 'string'
+			}, {
+				name : 'phonenum',
+				type : 'string'
+			}, {
+				name : 'status',
+				type : 'string'
+			}, {
+				name : 'email',
+				type : 'string'
+			}, {
+				name : 'createtime',
+				type : 'string'
+			}],
+			id : 'id',
+			localData : data
+		};
+		var dataAdapter = new $.jqx.dataAdapter(source);
+		$("#indGrid").jqxTreeGrid({
+			source : dataAdapter
+		});
+	}
+	
 	// 点击logo回到前台首页
 	function toIndex(){
 		window.location.href = basePath+"/page/toIndex";

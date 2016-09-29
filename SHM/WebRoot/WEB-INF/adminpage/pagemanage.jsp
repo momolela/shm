@@ -103,15 +103,15 @@
 			/*r_content start*/
 			.fm_content .t_right .r_content{width:100%;background:#bbb;position: relative;}
 			.fm_content .t_right .r_content .c_content{width:100%;height: 100%;background: #efefef;}
-			.fm_content .t_right .r_content .c_content ul{height: 40px;}
-			.fm_content .t_right .r_content .c_content ul li{float: left;width: 80px;height: 40px;text-align: center;}
+			.fm_content .t_right .r_content .c_content ul{height: 30px;}
+			.fm_content .t_right .r_content .c_content ul li{float: left;width: 80px;height: 30px;text-align: center;}
 			.fm_content .t_right .r_content .c_content ul li a{color: #999999;font-weight: bold;display: block;width: 80px;height: 40px;line-height: 40px;}
 			.fm_content .t_right .r_content .c_content .bannertable{width:100%;}
-			.fm_content .t_right .r_content .c_content .bannertable table{border-collapse: collapse;width: 100%;text-align: left;border: 1px solid #98bf21;}
-			.fm_content .t_right .r_content .c_content .bannertable table th{background: #33cc00;border: 1px solid #98bf21;color: #fff;height: 34px;padding: 8px;font-size: 16px;}
-			.fm_content .t_right .r_content .c_content .bannertable table tr:hover{background: #b1ffa4;}
+			.fm_content .t_right .r_content .c_content .bannertable table{border: 1px solid #ddd;border-collapse: collapse;width: 100%;text-align: left;border: 1px solid #eee;}
+			.fm_content .t_right .r_content .c_content .bannertable table thead th{text-align:center;background: #eee;color: #666;height: 26px;padding: 8px;font-size: 12px;}
+			.fm_content .t_right .r_content .c_content .bannertable table tr:hover{background: #eee;}
 			.fm_content .t_right .r_content .c_content .bannertable table tr:hover .t_action .inner{display: block;}
-			.fm_content .t_right .r_content .c_content .bannertable table td{border: 1px solid #98bf21;height: 34px;padding: 8px;}
+			.fm_content .t_right .r_content .c_content .bannertable table td{text-align:center;border: 1px solid #ddd;height: 34px;padding: 8px;}
 			.fm_content .t_right .r_content .c_content .bannertable table td .t_action{width: 81px;height: 24px;margin: 0 auto;}
 			.fm_content .t_right .r_content .c_content .bannertable table td .t_action .inner{display:none;}
 			.fm_content .t_right .r_content .c_content .bannertable table td .t_action a{width: 24px;height: 24px;display: block;float: left;margin-right: 2px;background: url("${basePath}/images/admin/index/ht_icon.png") no-repeat;}
@@ -231,7 +231,7 @@
 					<li>
 						<a href="${basePath }/toadmin/adminPage/toCustomerManage">
 							<i class="h_icon5"></i>
-							<span>顾客管理</span>
+							<span>用户管理</span>
 						</a>
 					</li>
 					<li>
@@ -301,30 +301,34 @@
 						<div style="width:80%;height:100%;position:absolute;top:80px;left:40px;">
 							<!-- table start -->
 							<table id="tabProduct">
-								<tr>
-									<th>序号</th>
-									<th>图片名称</th>
-									<th >图片描述</th>
-									<th>图片链接</th>
-									<th>管理</th>
-								</tr>
-								<c:forEach items="${bannerlist }" var="item"  varStatus="idx">
-									<tr class="tr">
-										<td>${idx.count }</td>
-										<td>${item.btitle }</td>
-										<td>${item.bcontent }</td>
-										<td>${item.burl }</td>
-										<td>
-											<div class="t_action">
-												<div class="inner">
-													<a href="javascript:void(0)" class="a_see" burl="${item.burl }" title="图片预览"></a>
-													<a href="javascript:void(0)" class="a_change" btitle="${item.btitle }" bcontent="${item.bcontent }" title="替换"></a>
-													<a href="javascript:void(0)" class="a_delete" bid="${item.id }" title="删除"></a>
-												</div>
-											</div>
-										</td>
+								<thead style="border:1px solid #ddd;">
+									<tr>
+										<th>序号</th>
+										<th>图片名称</th>
+										<th >图片描述</th>
+										<th>图片链接</th>
+										<th>管理</th>
 									</tr>
-								</c:forEach>
+								</thead>
+								<tbody>
+									<c:forEach items="${bannerlist }" var="item"  varStatus="idx">
+										<tr class="tr">
+											<td>${idx.count }</td>
+											<td>${item.btitle }</td>
+											<td>${item.bcontent }</td>
+											<td>${item.burl }</td>
+											<td>
+												<div class="t_action">
+													<div class="inner">
+														<a href="javascript:void(0)" class="a_see" burl="${item.burl }" title="图片预览"></a>
+														<a href="javascript:void(0)" class="a_change" btitle="${item.btitle }" bcontent="${item.bcontent }" title="替换"></a>
+														<a href="javascript:void(0)" class="a_delete" bid="${item.id }" title="删除"></a>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
 							</table>
 							<!-- end table -->
 							

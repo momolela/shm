@@ -66,6 +66,8 @@
 			.fm_content .t_right .r_location{height:51px;background:#e5e5e5;border-bottom:1px solid #ccc;line-height:51px;}
 			.fm_content .t_right .r_location i{width:14px;height:18px;display:block;background:url("${basePath}/images/admin/index/ht_icon.png") no-repeat;background-position:-16px -51px;float:left;margin:16px 20px 0 20px;}
 
+			.rpClose:hover{background:rgba(255,255,255,.6);}
+			
 			/*清除浮动*/
 			.clear{clear:both;}
 
@@ -186,7 +188,7 @@
 					<li>
 						<a href="${basePath }/toadmin/adminPage/toCustomerManage">
 							<i class="h_icon5"></i>
-							<span>顾客管理</span>
+							<span>用户管理</span>
 						</a>
 					</li>
 					<li>
@@ -347,10 +349,14 @@
 			<!-- editRoomBox end -->
 			
 			<!-- picBox start -->
-			<div class="picBox" style="background:#fff;width:600px;height:400px;position:absolute;top:50%;left:50%;margin-top:-200px;margin-left:-300px;z-index:999;box-shadow:0px 0px 10px #000;">
-			
+			<div class="picBox" id="picBox" style="display:none;background:#fff;width:600px;height:400px;position:absolute;top:50%;left:50%;margin-top:-200px;margin-left:-300px;z-index:999;box-shadow:0px 0px 10px #000;">
+				<img src="" width="600px" height="400px"/>
+				<div class="prev" style="cursor:pointer;font-family:'楷体';width:100px;height:100%;font-size:30px;line-height:400px;text-align:center;color:#fff;position:absolute;top:0;left:-100px;-webkit-user-select:none;">&lt;</div>
+				<div class="next" style="cursor:pointer;font-family:'楷体';width:100px;height:100%;font-size:30px;line-height:400px;text-align:center;color:#fff;position:absolute;top:0;right:-100px;-webkit-user-select:none;">&gt;</div>
 			</div>
-			<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:998;"></div>
+			<div class="roomPicMask" id="roomPicMask" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:998;">
+				<a class="rpClose" style="font-family:'楷体';font-size:18px;display:block;width:30px;height:30px;border:1px solid #fff;color:#fff;border-radius:50%;text-align:center;line-height:30px;position:absolute;top:20px;right:40px;cursor:pointer;">x</a>
+			</div>
 			<!-- picBox end -->
 			
 		</div>
@@ -694,30 +700,10 @@
 		});
 		
 		// 点击增加客房
+		var urlArr = new Array();
 		$("#addRoom").click(function(){
 			$('.addRoomBox').jqxWindow('open');
 		});
-		$("#ooButton_addrm").click(function(){
-			// 准备数据
-			var roomName = $("#roomName").val();
-			var roomStyle = $("#roomStyle").val();
-			if(roomName.trim()!=""&&roomStyle!=""){
-				$.ajax({
-					url:basePath+"/admin/roomManage/addRoom",
-					data:{"roomName":roomName,"roomStyle":roomStyle,"roomPicUrl":roomPicUrl},
-					type:'post',
-					success:function(data){
-						if(data.result=="success"){
-							// 再次请求刷新页面的表格
-							window.location.reload(location);
-						}
-					}
-				});
-			}else{
-				showInfo("字段不能为空~","warning");
-			}
-		});
-		// 点击添加客房弹出框 中的upload按钮
 		$.tzUpload({
 			url:basePath+"/ajaxupload/ajaxUploadAction/addRoomPic",
 			postName:"bimg",
@@ -727,8 +713,29 @@
 			single:false,
 			callback:function(data){
 				var data = eval("("+data+")");
-				// 拼接图片地址
-				roomPicUrl = roomPicUrl+data.url+";";
+				urlArr.push(data.url);
+			}
+		});
+		$("#ooButton_addrm").click(function(){
+			// 准备数据
+			var roomName = $("#roomName").val();
+			var roomStyle = $("#roomStyle").val();
+			if(roomName.trim()!=""&&roomStyle!=""){
+				$.ajax({
+					url:basePath+"/admin/roomManage/addRoom",
+					data:{"roomName":roomName,"roomStyle":roomStyle,"urlArr":urlArr},
+					type:'post',
+					traditional: true,
+					success:function(data){
+						console.log(data.datamap.roomId);
+						if(data.result=="success"){
+							// 再次请求刷新页面的表格
+							window.location.reload(location);
+						}
+					}
+				});
+			}else{
+				showInfo("字段不能为空~","warning");
 			}
 		});
 		
@@ -859,7 +866,47 @@
 			});
 		});
 	});
-
+	
+	var roomPicUrlList = new Array();
+	function roomPic(event){
+		var roomid = $(event).attr("roomid");
+		$.ajax({
+			url: basePath+"/admin/roomManage/queryRoomPicByRoomId",
+			data:  {"roomid":roomid},
+			type: 'post',
+			success:function(data){
+				// 返回客房对应的图片连接的数组
+				if(data.datamap.roomPicUrl!=""){
+					roomPicUrlList = data.datamap.roomPicUrl;
+					$("#roomPicMask").show();
+					$("#picBox").show();
+					$("#picBox").find("img").attr("src",basePath+"/"+data.datamap.roomPicUrl[0]);
+				}else{
+					showInfo("该客房没有图片~","warning");
+				}
+			}
+		});
+	}
+	var index = 0;
+	$(".prev").click(function(){
+		if((index-1)<0){
+			index = roomPicUrlList.length;
+		}
+		$("#picBox").find("img").attr("src",basePath+"/"+roomPicUrlList[index-1]);
+		index = index-1;
+	});
+	$(".next").click(function(){
+		if((index+1)>=roomPicUrlList.length){
+			index = -1;
+		}
+		$("#picBox").find("img").attr("src",basePath+"/"+roomPicUrlList[index+1]);
+		index = index+1;
+	});
+	$(".rpClose").click(function(){
+		$("#roomPicMask").hide();
+		$("#picBox").hide();
+	});
+	
 	// 点击logo回到前台首页
 	function toIndex(){
 		window.location.href = basePath+"/page/toIndex";
