@@ -14,9 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.momolela.dao.IServiceOrderDao;
-import com.momolela.dao.IUserDao;
 import com.momolela.model.ServiceOrder;
-import com.momolela.model.User;
 import com.momolela.service.IServiceOrderService;
 
 /**
@@ -36,4 +34,22 @@ public class ServiceOrderServiceImpl implements IServiceOrderService {
 	public List<ServiceOrder> queryAllServiceOrderByUserId(Integer userid) {
 		return serviceOrderDao.queryAllServiceOrderByUserId(userid);
 	}
+
+	public List<ServiceOrder> queryServiceOrderByBillNowId(Integer billnowid) {
+		return serviceOrderDao.queryServiceOrderByBillNowId(billnowid);
+	}
+
+	public void updateServiceOrderByBillNowId(Integer billnowid) {
+		serviceOrderDao.updateServiceOrderByBillNowId(billnowid);
+	}
+
+	public void updateServiceOrderByServiceOrderId(Integer serviceorderid,
+			Integer billhistoryid) {
+		serviceOrderDao.updateServiceOrderByServiceOrderId(serviceorderid, billhistoryid);
+	}
+
+	public void addService(ServiceOrder serviceOrder) {
+		serviceOrderDao.addService(serviceOrder);
+	}
+
 }

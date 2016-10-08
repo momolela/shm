@@ -27,6 +27,8 @@ public interface ICommentsService {
 	public Comments findCommentsByUserId(Integer userid);
 	public Comments findCommentsByRoomId(Integer roomid);
 	
+	public void changeCommentsStatusById(Integer id);
+	
 	public void delCommentsById(Integer commentsId);
 	public void addComments(Comments comments);
 }

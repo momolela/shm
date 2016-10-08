@@ -34,4 +34,28 @@ public class OrderServiceImpl implements IOrderService {
 	public List<Order> queryAllOrderByUserId(Integer userid) {
 		return orderDao.queryAllOrderByUserId(userid);
 	}
+
+	public void addOrder(Order order) {
+		orderDao.addOrder(order);
+	}
+
+	public void updateOrderStatus(Integer userid, Integer status) {
+		orderDao.updateOrderStatus(userid, status);
+	}
+
+	public Order queryOrderByBillNowId(Integer billnowid) {
+		return orderDao.queryOrderByBillNowId(billnowid);
+	}
+
+	public Order queryAllOrderByUserIdAndStatus(Integer userid, Integer i) {
+		return orderDao.queryAllOrderByUserIdAndStatus(userid,i);
+	}
+
+	public void updateOrderByBillNowId(Integer billnowid) {
+		orderDao.updateOrderByBillNowId(billnowid);
+	}
+
+	public void updateOrderByOrderId(Integer orderid,Integer billhistoryid) {
+		orderDao.updateOrderByOrderId(orderid,billhistoryid);
+	}
 }

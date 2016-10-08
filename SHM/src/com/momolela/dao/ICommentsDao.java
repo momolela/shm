@@ -27,5 +27,6 @@ public interface ICommentsDao {
 	public Comments findCommentsByRoomId(Integer roomid);
 	public void delCommentsById(Integer commentsId);
 	public void addComments(Comments comments);
+	public void changeCommentsStatusById(Integer id);
 
 }

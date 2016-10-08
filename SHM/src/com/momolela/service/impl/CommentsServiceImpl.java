@@ -59,4 +59,8 @@ public class CommentsServiceImpl implements ICommentsService {
 		commentsDao.addComments(comments);
 	}
 
+	public void changeCommentsStatusById(Integer id) {
+		commentsDao.changeCommentsStatusById(id);
+	}
+
 }

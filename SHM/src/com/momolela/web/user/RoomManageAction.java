@@ -236,6 +236,22 @@ public class RoomManageAction extends BaseAction implements ServletRequestAware{
 		result = "success";
 		return AJAX_SUCCESS;
 	}
+	
+	public String queryAllRoomByRoomStyleId(){
+		Integer roomstyleid = Integer.parseInt(request.getParameter("roomstyleid"));
+		List<Room> roomList = iRoomService.queryAllRoomByRoomStyleId(roomstyleid);
+		datamap.put("roomList", roomList);
+		result = "success";
+		return AJAX_SUCCESS;
+	}
+	
+	public String updateRoomStatus(){
+		Integer status = Integer.parseInt(request.getParameter("status"));
+		Integer roomId = Integer.parseInt(request.getParameter("roomid"));
+		iRoomService.updateRoomStatus(status,roomId);
+		result = "success";
+		return AJAX_SUCCESS;
+	}
 
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;

@@ -21,4 +21,9 @@ import com.momolela.model.ServiceOrder;
  */
 public interface IServiceOrderDao {
 	List<ServiceOrder> queryAllServiceOrderByUserId(Integer userid);
+	List<ServiceOrder> queryServiceOrderByBillNowId(Integer billnowid);
+	void updateServiceOrderByBillNowId(Integer billnowid);
+	void updateServiceOrderByServiceOrderId(Integer serviceorderid,
+			Integer billhistoryid);
+	void addService(ServiceOrder serviceOrder);
 }

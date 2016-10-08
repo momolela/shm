@@ -2,6 +2,7 @@ package com.momolela.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,11 +28,14 @@ public class Order implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Date checkInTime;
+	private Date expireTime;
 	private Integer orderStatus;
 	private User userId;
 	private Room roomId;
 	private Date createTime;
 	private Date updateTime;
+	private BillNow billnowid;
+	private BillHistory billhistoryid;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +54,15 @@ public class Order implements java.io.Serializable {
 
 	public void setCheckInTime(Date checkInTime) {
 		this.checkInTime = checkInTime;
+	}
+
+	@Column(name = "expiretime")
+	public Date getExpireTime() {
+		return expireTime;
+	}
+
+	public void setExpireTime(Date expireTime) {
+		this.expireTime = expireTime;
 	}
 
 	@Column(name = "orderstauts")
@@ -97,5 +110,25 @@ public class Order implements java.io.Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH }, optional = true)
+	@JoinColumn(name = "billnowid")
+	public BillNow getBillnowid() {
+		return billnowid;
+	}
+
+	public void setBillnowid(BillNow billnowid) {
+		this.billnowid = billnowid;
+	}
+
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH }, optional = true)
+	@JoinColumn(name = "billhistoryid")
+	public BillHistory getBillhistoryid() {
+		return billhistoryid;
+	}
+
+	public void setBillhistoryid(BillHistory billhistoryid) {
+		this.billhistoryid = billhistoryid;
 	}
 }

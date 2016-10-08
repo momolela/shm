@@ -32,4 +32,50 @@ public class OrderDaoImpl extends BaseDaoImpl implements IOrderDao {
 		orderList = query.list();
 		return orderList;
 	}
+
+	public void addOrder(Order order) {
+		getSession().save(order);
+	}
+
+	public void updateOrderStatus(Integer userid, Integer status) {
+		String hql = "UPDATE Order o SET o.orderStatus=? WHERE o.userId = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, status);
+		query.setInteger(1, userid);
+		query.executeUpdate();
+	}
+
+	public Order queryOrderByBillNowId(Integer billnowid) {
+		Order order = new Order();
+		String hql = "FROM Order o WHERE o.billnowid = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, billnowid);
+		order = (Order) query.uniqueResult();
+		return order;
+	}
+
+	public Order queryAllOrderByUserIdAndStatus(Integer userid, Integer i) {
+		Order order = new Order();
+		String hql = "FROM Order o WHERE o.userId=? AND o.orderStatus != ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, userid);
+		query.setInteger(1, i);
+		order = (Order) query.uniqueResult();
+		return order;
+	}
+
+	public void updateOrderByBillNowId(Integer billnowid) {
+		String hql = "UPDATE Order o SET o.billnowid=null WHERE o.billnowid = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, billnowid);
+		query.executeUpdate();
+	}
+
+	public void updateOrderByOrderId(Integer orderid,Integer billhistoryid) {
+		String hql = "UPDATE Order o SET o.orderStatus='2',o.billhistoryid=? WHERE o.id = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, billhistoryid);
+		query.setInteger(1, orderid);
+		query.executeUpdate();
+	}
 }

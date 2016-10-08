@@ -75,4 +75,11 @@ public class CommentsDaoImpl extends BaseDaoImpl implements ICommentsDao {
 	public void addComments(Comments comments) {
 		getSession().save(comments);
 	}
+
+	public void changeCommentsStatusById(Integer id) {
+		String hql = "UPDATE Comments c SET c.status='1' WHERE c.id=?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, id);
+		query.executeUpdate();
+	}
 }

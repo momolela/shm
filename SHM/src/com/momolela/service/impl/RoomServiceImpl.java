@@ -84,4 +84,16 @@ public class RoomServiceImpl implements IRoomService {
 	public List<RoomPic> queryRoomPicByRoomId(Integer roomid) {
 		return iRoomDao.queryRoomPicByRoomId(roomid);
 	}
+
+	public List<Room> queryAllRoomByRoomStyleId(Integer roomstyleid) {
+		return iRoomDao.queryAllRoomByRoomStyleId(roomstyleid);
+	}
+
+	public Room queryRoomById(Integer roomId) {
+		return iRoomDao.queryRoomById(roomId);
+	}
+	
+	public void updateRoomStatus(Integer status, Integer roomId) {
+		iRoomDao.updateRoomStatus(status, roomId);
+	}
 }

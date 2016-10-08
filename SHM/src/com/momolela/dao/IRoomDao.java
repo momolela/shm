@@ -20,4 +20,7 @@ public interface IRoomDao {
 	public void addRoomPic(RoomPic roomPic);
 	public void delRoomPic(Integer delid);
 	public List<RoomPic> queryRoomPicByRoomId(Integer roomid);
+	public List<Room> queryAllRoomByRoomStyleId(Integer roomstyleid);
+	public Room queryRoomById(Integer roomId);
+	public void updateRoomStatus(Integer status, Integer roomId);
 }

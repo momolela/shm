@@ -21,4 +21,10 @@ import com.momolela.model.Order;
  */
 public interface IOrderDao {
 	List<Order> queryAllOrderByUserId(Integer userid);
+	void addOrder(Order order);
+	void updateOrderStatus(Integer userid, Integer status);
+	Order queryOrderByBillNowId(Integer billnowid);
+	Order queryAllOrderByUserIdAndStatus(Integer userid, Integer i);
+	void updateOrderByBillNowId(Integer billnowid);
+	void updateOrderByOrderId(Integer orderid,Integer billhistoryid);
 }

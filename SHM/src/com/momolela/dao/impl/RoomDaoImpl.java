@@ -121,4 +121,30 @@ public class RoomDaoImpl extends BaseDaoImpl implements IRoomDao {
 		roomPicList = query.list();
 		return roomPicList;
 	}
+
+	public List<Room> queryAllRoomByRoomStyleId(Integer roomstyleid) {
+		List<Room> roomList = new ArrayList<Room>();
+		String hql = "from Room r where r.roomStyle = ? and r.roomStatus=0";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, roomstyleid);
+		roomList =  query.list();
+		return roomList;
+	}
+
+	public Room queryRoomById(Integer roomId) {
+		Room room = new Room();
+		String hql = "FROM Room r WHERE r.id = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, roomId);
+		room = (Room) query.uniqueResult();
+		return room;
+	}
+
+	public void updateRoomStatus(Integer status, Integer roomId) {
+		String hql = "UPDATE Room r SET r.roomStatus=? WHERE r.id = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, status);
+		query.setInteger(1, roomId);
+		query.executeUpdate();
+	}
 }

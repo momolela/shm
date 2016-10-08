@@ -298,6 +298,13 @@
 				}
 			}
 		});
+		
+		//双击一行
+		$("#indGrid").on('rowDoubleClick', function (event) {
+			var args = event.args;
+			var row = args.row;
+			window.location = basePath+"/toadmin/adminPage/toCheckoutCenter?id="+row.id;
+		});
 	
 		// jqweight控件----表格
 		$("#indGrid").jqxTreeGrid({

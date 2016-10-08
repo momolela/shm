@@ -1,5 +1,6 @@
 package com.momolela.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,8 @@ public class ServiceOrder implements java.io.Serializable {
 	private Service serviceId;
 	private String allMoney;
 	private Integer status;
+	private BillNow billnowid;
+	private BillHistory billhistoryid;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,5 +78,25 @@ public class ServiceOrder implements java.io.Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH }, optional = true)
+	@JoinColumn(name = "billnowid")
+	public BillNow getBillnowid() {
+		return billnowid;
+	}
+
+	public void setBillnowid(BillNow billnowid) {
+		this.billnowid = billnowid;
+	}
+
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH }, optional = true)
+	@JoinColumn(name = "billhistoryid")
+	public BillHistory getBillhistoryid() {
+		return billhistoryid;
+	}
+
+	public void setBillhistoryid(BillHistory billhistoryid) {
+		this.billhistoryid = billhistoryid;
 	}
 }
