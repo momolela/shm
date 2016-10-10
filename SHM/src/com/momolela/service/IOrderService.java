@@ -8,6 +8,7 @@
  */
 package com.momolela.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.momolela.model.Order;
@@ -30,4 +31,8 @@ public interface IOrderService {
 	Order queryAllOrderByUserIdAndStatus(Integer userid, Integer i);
 	void updateOrderByBillNowId(Integer billnowid);
 	void updateOrderByOrderId(Integer orderid,Integer billhistoryid);
+	Order queryOrderByBillHistoryId(Integer billhistoryid);
+	Order queryAllOrderByUserIdAndBillNowId(Integer userid);
+	void updateOrderByOrderId(Integer roomid,Integer orderid,Integer status);
+	void updateOrderExpireTimeByUserId(Date addexpiretime, Integer id, Integer i);
 }

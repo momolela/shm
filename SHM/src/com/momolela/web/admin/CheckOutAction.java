@@ -1,6 +1,7 @@
 package com.momolela.web.admin;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -153,6 +154,30 @@ public class CheckOutAction extends BaseAction implements ServletRequestAware {
 		return AJAX_SUCCESS;
 	}
 	
+	public String queryBillHistoryByUserId(){
+		Integer userid = Integer.parseInt(request.getParameter("userid"));
+		List<BillHistory> billHistoryList = billHistoryService.queryBillHistoryByUserId(userid);
+		if(billHistoryList!=null){
+			List<Map<String, Object>> billMapList = new ArrayList<Map<String, Object>>();
+			// 有多少个就有多少个历史账单
+			for(BillHistory billHistory:billHistoryList){
+				Integer billhistoryid = billHistory.getId();
+				Map<String, Object> billMap = new HashMap<String, Object>();
+				Order order = orderService.queryOrderByBillHistoryId(billhistoryid);
+				List<ServiceOrder> serviceOrderList = serviceOrderService.queryServiceOrderByBillHistoryId(billhistoryid);
+				billMap.put("billhistoryid", billhistoryid);
+				billMap.put("order", order);
+				billMap.put("serviceOrderList", serviceOrderList);
+				billMapList.add(billMap);
+			}
+			datamap.put("billMapList", billMapList);
+			result = "success";
+		}else{
+			result = "fail";
+		}
+		return AJAX_SUCCESS;
+	}
+	
 	public String delBillNowByUserId(){
 		Integer userid = Integer.parseInt(request.getParameter("userid"));
 		BillNow billNow = billNowService.queryBillNowByUserId(userid);
@@ -245,6 +270,32 @@ public class CheckOutAction extends BaseAction implements ServletRequestAware {
 		
 		serviceOrderService.addService(serviceOrder);
 		
+		result = "success";
+		return AJAX_SUCCESS;
+	}
+	
+	public String updateOrderByUserId(){
+		Integer userid = Integer.parseInt(request.getParameter("userid"));
+		Integer roomid = Integer.parseInt(request.getParameter("roomid"));
+		Order order = orderService.queryAllOrderByUserIdAndBillNowId(userid);
+		orderService.updateOrderByOrderId(roomid,order.getId(),3);
+		result = "success";
+		return AJAX_SUCCESS;
+	}
+	
+	public String updateOrderExpireTimeByUserId(){
+		Integer userid = Integer.parseInt(request.getParameter("userid"));
+		Date addexpiretime = SunDateUtils.parseDate(request.getParameter("addexpiretime"));
+		Order order = orderService.queryAllOrderByUserIdAndBillNowId(userid);
+		orderService.updateOrderExpireTimeByUserId(addexpiretime,order.getId(),4);
+		result = "success";
+		return AJAX_SUCCESS;
+	}
+	
+	public String updateBillNowByUserId(){
+		Integer userid = Integer.parseInt(request.getParameter("userid"));
+		Date addexpiretime = SunDateUtils.parseDate(request.getParameter("addexpiretime"));
+		billNowService.updateBillNowByUserId(userid,addexpiretime);
 		result = "success";
 		return AJAX_SUCCESS;
 	}

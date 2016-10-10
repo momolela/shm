@@ -252,6 +252,15 @@ public class RoomManageAction extends BaseAction implements ServletRequestAware{
 		result = "success";
 		return AJAX_SUCCESS;
 	}
+	
+	public String updateRoomStatusById(){
+		Integer roomidNow = Integer.parseInt(request.getParameter("roomidNow"));
+		Integer roomidHistory = Integer.parseInt(request.getParameter("roomidHistory"));
+		iRoomService.updateRoomStatus(2, roomidNow);
+		iRoomService.updateRoomStatus(0, roomidHistory);
+		result = "success";
+		return AJAX_SUCCESS;
+	}
 
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;

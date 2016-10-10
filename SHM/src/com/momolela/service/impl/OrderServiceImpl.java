@@ -8,6 +8,7 @@
  */
 package com.momolela.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,21 @@ public class OrderServiceImpl implements IOrderService {
 
 	public void updateOrderByOrderId(Integer orderid,Integer billhistoryid) {
 		orderDao.updateOrderByOrderId(orderid,billhistoryid);
+	}
+
+	public Order queryOrderByBillHistoryId(Integer billhistoryid) {
+		return orderDao.queryOrderByBillHistoryId(billhistoryid);
+	}
+
+	public Order queryAllOrderByUserIdAndBillNowId(Integer userid) {
+		return orderDao.queryAllOrderByUserIdAndBillNowId(userid);
+	}
+
+	public void updateOrderByOrderId(Integer roomid,Integer orderid,Integer status) {
+		orderDao.updateOrderByOrderId(roomid,orderid,status);
+	}
+
+	public void updateOrderExpireTimeByUserId(Date addexpiretime,Integer id, Integer i) {
+		orderDao.updateOrderExpireTimeByUserId(addexpiretime,id, i);
 	}
 }

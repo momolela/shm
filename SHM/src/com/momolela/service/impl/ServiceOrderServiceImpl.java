@@ -52,4 +52,9 @@ public class ServiceOrderServiceImpl implements IServiceOrderService {
 		serviceOrderDao.addService(serviceOrder);
 	}
 
+	public List<ServiceOrder> queryServiceOrderByBillHistoryId(
+			Integer billhistoryid) {
+		return serviceOrderDao.queryServiceOrderByBillHistoryId(billhistoryid);
+	}
+
 }

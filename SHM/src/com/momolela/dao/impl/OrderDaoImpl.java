@@ -9,6 +9,7 @@
 package com.momolela.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -76,6 +77,42 @@ public class OrderDaoImpl extends BaseDaoImpl implements IOrderDao {
 		Query query = getSession().createQuery(hql);
 		query.setInteger(0, billhistoryid);
 		query.setInteger(1, orderid);
+		query.executeUpdate();
+	}
+
+	public Order queryOrderByBillHistoryId(Integer billhistoryid) {
+		Order order = new Order();
+		String hql = "FROM Order o WHERE o.billhistoryid = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, billhistoryid);
+		order = (Order) query.uniqueResult();
+		return order;
+	}
+
+	public Order queryAllOrderByUserIdAndBillNowId(Integer userid) {
+		Order order = new Order();
+		String hql = "FROM Order o WHERE o.userId = ? AND o.billnowid != null";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, userid);
+		order = (Order) query.uniqueResult();
+		return order;
+	}
+
+	public void updateOrderByOrderId(Integer roomid,Integer orderid,Integer status) {
+		String hql = "UPDATE Order o SET o.orderStatus=?,o.roomId=? WHERE o.id = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, status);
+		query.setInteger(1, roomid);
+		query.setInteger(2, orderid);
+		query.executeUpdate();
+	}
+
+	public void updateOrderExpireTimeByUserId(Date addexpiretime,Integer id, Integer i) {
+		String hql = "UPDATE Order o SET o.expireTime=?, o.orderStatus=? WHERE o.id = ?";
+		Query query = getSession().createQuery(hql);
+		query.setDate(0, addexpiretime);
+		query.setInteger(1, i);
+		query.setInteger(2, id);
 		query.executeUpdate();
 	}
 }

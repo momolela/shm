@@ -279,6 +279,70 @@
 				</div>
 				<!-- r_init end -->
 				
+				<!-- r_billhistory start -->
+				<div class="r_billhistory animated fadeInDown" style="display:none;width:96%;height:auto;margin-left:20px;">
+					<div class="billhistory_init" style="width:100%;height:100px;margin-top:10px;line-height:100px;text-align:center;display:none;">当前没有历史账单记录~</div>
+					<div class="billhistory_info" style="width:100%;height:auto;">
+						<ul class="info_ul">
+							<!-- <li style="margin-top:20px;width:100%;height:auto;background:rgba(37,192,22,.4);border-radius:4px;">
+								<div style="width:100%;height:60px;">
+									<div style="width:40px;height:30px;float:left;margin:18px 0 0 60px;font-size:20px;"><i style="font-style:italic;">1</i>：</div>
+									<div style="width:200px;height:30px;float:left;margin:18px 0 0 30px;"><span>入住时间：</span>2016-10-01</div>
+									<div style="width:200px;height:30px;float:left;margin:18px 0 0 0;"><span>到期时间：</span>2016-10-07</div>
+									<div style="cursor:pointer;color:#fff;width:100px;height:30px;float:right;margin:18px 0 0 0;">明细&gt;&gt;</div>
+								</div>
+								<div class="detailbox_bill" style="width:98%;height:auto;background:#fff;border:1px solid #eee;margin-left:10px;border-radius:0px 0px 4px 4px;">
+									<ul>
+										<li class="roomService" style="width:100%;height:60px;background:#fff;border-bottom:1px solid #eee;">
+											<div style="width:260px;height:30px;margin-top:12px;margin-left:30px;float:left;">
+												<span style="display:inline-block;width:50px;height:30px;float:left;line-height:30px;">费用名:</span><div style="width:auto;height:30px;float:left;line-height:30px;"></div>
+											</div>
+											<div style="width:200px;height:30px;margin-top:12px;float:left;">
+												<span style="display:inline-block;width:50px;height:30px;float:left;line-height:30px;">客房号:</span><div style="width:auto;height:30px;float:left;line-height:30px;"></div>
+											</div>
+											<div style="width:200px;height:30px;margin-top:12px;float:left;">
+												<span style="display:inline-block;width:40px;height:30px;float:left;line-height:30px;">状态:</span><div style="width:auto;height:30px;float:left;line-height:30px;"></div>
+											</div>
+											<div style="width:200px;height:30px;margin-top:12px;float:left;">
+												<span style="display:inline-block;width:40px;height:30px;float:left;line-height:30px;">费用:</span><div class="money" style="width:auto;height:30px;float:left;line-height:30px;"></div>
+											</div>
+										</li>
+										<li class="Service" style="width:100%;height:60px;background:#fff;border-bottom:1px solid #eee;">
+											<div style="width:260px;height:30px;margin-top:12px;margin-left:30px;float:left;">
+												<span style="display:inline-block;width:50px;height:30px;float:left;line-height:30px;">费用名:</span><div style="width:auto;height:30px;float:left;line-height:30px;"></div>
+											</div>
+											<div style="width:200px;height:30px;margin-top:12px;float:left;">
+												<span style="display:inline-block;width:40px;height:30px;float:left;line-height:30px;">状态:</span><div style="width:auto;height:30px;float:left;line-height:30px;"></div>
+											</div>
+											<div style="width:200px;height:30px;margin-top:12px;float:left;">
+												<span style="display:inline-block;width:40px;height:30px;float:left;line-height:30px;">费用:</span><div class="money" style="width:auto;height:30px;float:left;line-height:30px;"></div>
+											</div>
+										</li>
+										<li class="foodService" style="width:100%;height:auto;border-bottom:1px solid #eee;">
+											<div style="width:100%;height:60px;background:#fff;">
+												<div style="width:260px;height:30px;margin-top:12px;margin-left:30px;float:left;">
+													<span style="display:inline-block;width:50px;height:30px;float:left;line-height:30px;">费用名:</span><div style="width:auto;height:30px;float:left;line-height:30px;"></div>
+												</div>
+												<div style="width:200px;height:30px;margin-top:12px;float:left;">
+													<span style="display:inline-block;width:40px;height:30px;float:left;line-height:30px;">状态:</span><div style="width:auto;height:30px;float:left;line-height:30px;"></div>
+												</div>
+												<div style="width:200px;height:30px;margin-top:12px;float:left;">
+													<span style="display:inline-block;width:40px;height:30px;float:left;line-height:30px;">费用:</span><div class="money" style="width:auto;height:30px;float:left;line-height:30px;"></div>
+												</div>
+												<div style="width:70px;height:30px;margin-top:12px;float:right;">
+													<span id="fooddetail" style="display:inline-block;width:50px;height:30px;float:left;line-height:30px;color:#25c016;cursor:pointer;">明细&gt;&gt;</span>
+												</div>
+											</div>
+											<div class="detailbox" style="display:none;width:99%;height:100px;margin-left:6px;border:1px solid #eee;border-radius:0px 0px 4px 4px;"></div>
+										</li>
+									</ul>
+								</div>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+				<!-- r_billhistory end -->
+				
 				<!-- r_roommanage start -->
 				<div class="r_roommanage animated fadeInDown" style="display:none;width:96%;height:auto;margin-left:20px;">
 					<div class="room_info" style="width:100%;height:200px;border:1px solid #eee;background:#eee;"></div>
@@ -295,36 +359,7 @@
 				<div class="r_servicemanage animated fadeInDown" style="display:none;width:96%;height:auto;margin-left:20px;">
 					<div class="service_init" style="width:100%;height:100px;background:#eee;margin-top:10px;line-height:100px;text-align:center;display:none;">当前没有消费记录~</div>
 					<div class="service_info" style="width:100%;height:auto;">
-						<ul>
-							<!-- <li class='animated fadeInDown Service' style='width:100%;height:60px;border:1px solid #eee;margin-top:10px;background:#fff;box-shadow:0px 0px 5px #eee;'>
-								<div style='width:260px;height:30px;margin-top:12px;margin-left:30px;float:left;'>
-									<span style='display:inline-block;width:50px;height:30px;float:left;line-height:30px;'>费用名:</span><div style='width:auto;height:30px;float:left;line-height:30px;'></div>
-								</div>
-								<div style='width:200px;height:30px;margin-top:12px;float:left;'>
-									<span style='display:inline-block;width:40px;height:30px;float:left;line-height:30px;'>状态:</span><div style='width:auto;height:30px;float:left;line-height:30px;'></div>
-								</div>
-								<div style='width:200px;height:30px;margin-top:12px;float:left;'>
-									<span style='display:inline-block;width:40px;height:30px;float:left;line-height:30px;'>费用:</span><div class='money' style='width:auto;height:30px;float:left;line-height:30px;'></div>
-								</div>
-							</li>
-							<li class='animated fadeInDown foodService' style='width:100%;height:auto;margin-top:10px;'>
-								<div style='border:1px solid #eee;width:100%;height:60px;background:#fff;box-shadow:0px 0px 5px #eee;'>
-									<div style='width:260px;height:30px;margin-top:12px;margin-left:30px;float:left;'>
-										<span style='display:inline-block;width:50px;height:30px;float:left;line-height:30px;'>费用名:</span><div style='width:auto;height:30px;float:left;line-height:30px;'></div>
-									</div>
-									<div style='width:200px;height:30px;margin-top:12px;float:left;'>
-										<span style='display:inline-block;width:40px;height:30px;float:left;line-height:30px;'>状态:</span><div style='width:auto;height:30px;float:left;line-height:30px;'></div>
-									</div>
-									<div style='width:200px;height:30px;margin-top:12px;float:left;'>
-										<span style='display:inline-block;width:40px;height:30px;float:left;line-height:30px;'>费用:</span><div class='money' style='width:auto;height:30px;float:left;line-height:30px;'></div>
-									</div>
-									<div style='width:70px;height:30px;margin-top:12px;float:right;'>
-										<span id='fooddetail' style='display:inline-block;width:50px;height:30px;float:left;line-height:30px;color:#25c016;cursor:pointer;'>明细&gt;&gt;</span>
-									</div>
-								</div>
-								<div class='detailbox' style='display:none;width:99%;height:100px;margin-left:6px;border:1px solid #eee;border-radius:0px 0px 4px 4px;'></div>
-							</li> -->
-						</ul>
+						<ul></ul>
 					</div>
 					<div class="service_toolbar" style="width:100%;height:30px;margin-top:20px;margin-bottom:10px;">
 						<input id="s_addservice" type="button" value="我要消费" style="float:left;margin-right:10px;"/>
@@ -380,6 +415,44 @@
 			</div>
 		</div>
 		<!-- quitroomwindow end -->
+		
+		<!-- changeroomwindow start -->
+		<div class="changeroomwindow">
+			<div id="changeroomwindowHeader">
+				<span id="configContainer" style="float: left">换房</span>
+			</div>
+			<div id="changeroomwindowContent" style="overflow: hidden;position:relative;">
+				<div class="input" style="width:100%;height:66px;line-height:66px;text-align:center;">
+					<div style="width:100%;height:30px;margin-top:20px;">
+						<span style="width:40px;height:30px;display:inline-block;line-height:30px;margin-left:20px;float:left;">选房：</span>
+						<div class="roomstyle_change" style="width:110px;height:30px;float:left;margin-left:20px;"></div>
+						<div class="roomname_change" style="width:110px;height:30px;float:left;margin-left:20px;"></div>
+					</div>
+				</div>
+				<div style="position:absolute;bottom:20px;left:88px;width:216px;height:30px;">
+					<input type="button" value="确定" id="ooButton_changer" />
+					<input type="button" value="取消" id="ccButton_changer" style="margin-left:50px;"/>
+				</div>
+			</div>
+		</div>
+		<!-- changeroomwindow end -->
+		
+		<!-- continueroomwindow start -->
+		<div class="continueroomwindow">
+			<div id="continueroomwindowHeader">
+				<span id="configContainer" style="float: left">续房</span>
+			</div>
+			<div id="continueroomwindowContent" style="overflow: hidden;position:relative;">
+				<div class="input" style="width:100%;height:66px;line-height:66px;text-align:center;">
+					<div style="margin:20px 0 0 24px;"><span style="display:inline-block;width:60px;height:30px;line-height:30px;float:left;">续房至：</span><div class="addexpiretime" style="width:150px;height:30px;float:left;border:1px solid #eee;"></div></div>
+				</div>
+				<div style="position:absolute;bottom:20px;left:34px;width:216px;height:30px;">
+					<input type="button" value="确定" id="ooButton_continuer" />
+					<input type="button" value="取消" id="ccButton_continuer" style="margin-left:50px;"/>
+				</div>
+			</div>
+		</div>
+		<!-- continueroomwindow end -->
 		
 		<!-- addservicewindow start -->
 		<div class="addservicewindow">
@@ -457,7 +530,6 @@
 		
 		//
 		$("#s_now").jqxButton({
-			disabled: true,
 			theme: theme,
 			width: 100,
 			height: 30
@@ -664,6 +736,110 @@
 		});
 		
 		//
+		$(".changeroomwindow").jqxWindow({
+			isModal :true,
+			modalOpacity: 0.3,
+			theme : theme,
+			width : 380,
+			height : 180,
+			resizable : false,
+			autoOpen : false,
+			cancelButton : $('#ccButton_changer'),
+			okButton : $('#ooButton_changer'),
+			initContent : function() {
+				$('#ooButton_changer').jqxButton({
+					theme : theme,
+					template : "primary",
+					cursor : "pointer",
+					width : '80',
+					height : '30'
+				});
+				$('#ccButton_changer').jqxButton({
+					theme : theme,
+					template : "info",
+					cursor : "pointer",
+					width : '80',
+					height : '30'
+				});
+			}
+		});
+		$("#ooButton_changer").on("click",function(){
+			// 准备数据
+			var roomidHistory = chooseroomid;
+			var roomidNow = $(".roomname_change").val();
+			var userid = chooseuserid;
+			// 订单修改
+			// ----1.先通过userid和billnowid不为空得到order订单记录
+			$.ajax({
+				url: basePath+"/admin/checkOut/updateOrderByUserId",
+				data: {"userid":userid,"roomid":roomidNow},
+				type: 'post',
+				success: function(data){
+					// 客房的状态修改
+					$.ajax({
+						url: basePath+"/admin/roomManage/updateRoomStatusById",
+						data: {"roomidNow":roomidNow,"roomidHistory":roomidHistory},
+						type: 'post',
+						success: function(data){
+							showInfo("换房成功~","success");
+						}
+					});
+				}
+			});
+		});
+		
+		//
+		$(".continueroomwindow").jqxWindow({
+			isModal :true,
+			modalOpacity: 0.3,
+			theme : theme,
+			width : 280,
+			height : 160,
+			resizable : false,
+			autoOpen : false,
+			cancelButton : $('#ccButton_continuer'),
+			okButton : $('#ooButton_continuer'),
+			initContent : function() {
+				$('#ooButton_continuer').jqxButton({
+					theme : theme,
+					template : "primary",
+					cursor : "pointer",
+					width : '80',
+					height : '30'
+				});
+				$('#ccButton_continuer').jqxButton({
+					theme : theme,
+					template : "info",
+					cursor : "pointer",
+					width : '80',
+					height : '30'
+				});
+			}
+		});
+		$("#ooButton_continuer").on("click",function(){
+			// 准备数据
+			var addexpiretime = $(".addexpiretime").val();
+			var userid = chooseuserid;
+			// 订单修改
+			$.ajax({
+				url: basePath+"/admin/checkOut/updateOrderExpireTimeByUserId",
+				data: {"userid":userid,"addexpiretime":addexpiretime},
+				type: 'post',
+				success: function(data){
+					// billNow修改
+					$.ajax({
+						url: basePath+"/admin/checkOut/updateBillNowByUserId",
+						data: {"userid":userid,"addexpiretime":addexpiretime},
+						type: 'post',
+						success: function(data){
+							showInfo("续房成功~","success");
+						}
+					});
+				}
+			});
+		});
+		
+		//
 		$(".addservicewindow").jqxWindow({
 			isModal :true,
 			modalOpacity: 0.3,
@@ -775,7 +951,52 @@
 		});
 		
 		//
+		$(".roomstyle_change").jqxDropDownList({
+			theme : theme,
+			source: null,
+			placeHolder : '请选择客房类型~',
+			width: '110',
+			height: '30',
+			dropDownHeight: '80',
+			displayMember: "roomStyle",
+		    valueMember: "id"
+		});
+		$(".roomstyle_change").on("change",function(){
+			// 加载指定客房类型的未预定的空房
+			$.ajax({
+				url:basePath+"/admin/roomManage/queryAllRoomByRoomStyleId",
+				type: 'post',
+				data: {"roomstyleid":$(".roomstyle_change").val()},
+				success: function(data){
+					if(data.result=="success"){
+						source ={
+						datatype: "json",
+						datafields: 
+							[{ name: 'roomName' },
+							 { name: 'id' }],
+							 localdata: data.datamap.roomList
+						};
+						dataAdapter = new $.jqx.dataAdapter(source);
+						$(".roomname_change").jqxDropDownList({source: dataAdapter});
+					}
+				}
+			});
+		});
+		
+		//
 		$(".roomname").jqxDropDownList({
+			theme : theme,
+			source: null,
+			placeHolder : '请选择客房~',
+			width: '110',
+			height: '30',
+			dropDownHeight: '80',
+			displayMember: "roomName",
+		    valueMember: "id"
+		});
+		
+		//
+		$(".roomname_change").jqxDropDownList({
 			theme : theme,
 			source: null,
 			placeHolder : '请选择客房~',
@@ -808,6 +1029,17 @@
 			height : '30',
 		});
 		
+		//
+		$(".addexpiretime").jqxDateTimeInput({
+			theme : theme,
+			formatString : "yyyy-MM-dd",
+			culture : 'ch-CN',
+			placeHolder: "到期时间",
+			value : null,
+			width : '150',
+			height : '30',
+		});
+		
 		// 加载所有的客房类型
 		$.ajax({
 			url:basePath+"/admin/roomManage/queryAllRoomStyle",
@@ -823,6 +1055,7 @@
 						 localdata: data.datamap.roomStyleList
 					};
 					dataAdapter = new $.jqx.dataAdapter(source);
+					$(".roomstyle_change").jqxDropDownList({source: dataAdapter});
 					$(".roomstyle").jqxDropDownList({source: dataAdapter});
 				}
 			}
@@ -900,9 +1133,9 @@
 	}
 	
 	function showData(userid){
+		// 循环选中该用户
 		for(var i = 0;i<localdata.userList.length;i++){
 				if(localdata.userList[i].id==userid){
-					// 选中了该用户
 					var infoHtml = "<div class='animated fadeInDown' style='width:100%;height:100px;border:1px solid #eee;background:rgba(37,192,22,.5);'>"+
 "						<div class='leftpic' style='float:left;width:90px;height:90px;border-radius:50%;background:#fff;margin:-10px 0 0px 50px;box-shadow:0px 0px 10px #000;'>"+
 "							<img alt='' src='${basePath}/"+localdata.userList[i].picUrl+"' width='90px' height='90px' style='border-radius:50%;'>"+
@@ -936,6 +1169,7 @@
 				}
 			}
 			
+			// 当前账单中-------客房消费，普通消费，用餐消费，和总价钱
 			$.ajax({
 				url: basePath+"/admin/checkOut/queryBillNowByUserId",
 				data: {"userid":userid},
@@ -1063,7 +1297,6 @@
 			$(".name_xiala").hide();
 		}
 		$(".name_li").on("click",function(){
-			$("#s_now").jqxButton({disabled:true});
 			$("#customerName").val($(this).text());
 			$(".name_xiala").hide();
 			$(".r_init").hide();
@@ -1072,10 +1305,12 @@
 			$(".r_total").empty();
 			$(".r_roommanage").hide();
 			$(".r_servicemanage").hide();
+			$(".r_billhistory").hide();
 			// 展示数据
 			var userid = $(this).attr("userid");
 			chooseuserid = userid;
-			showData(userid);
+			// showData(userid);
+			window.location.href = basePath+"/toadmin/adminPage/toCheckoutCenter?id="+chooseuserid;
 			// 显示按钮
 			$(".s_room,.s_service,.s_history,.s_now").show();
 		});
@@ -1084,12 +1319,12 @@
 	$("#s_room").click(function(){
 		$(".r_init").hide();
 		$(".r_servicemanage").hide();
+		$(".r_billhistory").hide();
 		$(".r_showInfo").empty();
 		$(".r_billList ul").empty();
 		$(".r_total").empty();
 		$(".r_roommanage").show();
 		$(".room_info").empty();
-		$("#s_now").jqxButton({disabled:false});
 		for(var i = 0;i<localdata.userList.length;i++){
 			if(localdata.userList[i].id==chooseuserid){
 				var html = "<div style='margin-left:30px;margin-top:10px;'><span>姓名：</span>"+localdata.userList[i].realName+"</div>"+
@@ -1098,6 +1333,7 @@
 				$(".room_info").append(html);
 			}
 		}
+		// 客房管理中的信息是当前账单中的客房信息~
 		$.ajax({
 			url: basePath+"/admin/checkOut/queryBillNowByUserId",
 			data: {"userid":chooseuserid},
@@ -1136,15 +1372,15 @@
 	});
 	
 	$("#s_service").click(function(){
-		$("#s_now").jqxButton({disabled:false});
 		$(".r_init").hide();
 		$(".r_showInfo").empty();
 		$(".r_billList ul").empty();
 		$(".service_info ul").empty();
 		$(".r_total").empty();
 		$(".r_roommanage").hide();
+		$(".r_billhistory").hide();
 		$(".r_servicemanage").show();
-		// 请求服务的数据
+		// 消费管理中的当前账单的服务消费账单（不包括客房消费）
 		$.ajax({
 			url: basePath+"/admin/checkOut/queryBillNowByUserId",
 			data: {"userid":chooseuserid},
@@ -1215,17 +1451,126 @@
 	});
 	
 	$("#s_history").click(function(){
-		$("#s_now").jqxButton({disabled:false});
 		$(".r_init").hide();
 		$(".r_showInfo").empty();
 		$(".r_billList ul").empty();
+		$(".billhistory_info .info_ul").empty();
 		$(".r_total").empty();
 		$(".r_roommanage").hide();
 		$(".r_servicemanage").hide();
+		$(".r_billhistory").show();
+		// 请求历史账单数据
+		$.ajax({
+			url: basePath+"/admin/checkOut/queryBillHistoryByUserId",
+			data: {"userid":chooseuserid},
+			type: 'post',
+			success: function(data){
+				console.log(data.datamap);
+				if(data.datamap.billMapList.length!=0){
+					// 有历史账单
+					$(".billhistory_init").hide();
+					for(var i = 0;i<data.datamap.billMapList.length;i++){
+						var html = "<li class='info_li' style='margin-top:20px;width:100%;height:auto;background:rgba(37,192,22,.4);border-radius:4px;margin-bottom:20px;'>"+
+"								<div style='width:100%;height:60px;'>"+
+"									<div style='width:40px;height:30px;float:left;margin:18px 0 0 60px;font-size:20px;'><i style='font-style:italic;'>"+(i+1)+"</i>：</div>"+
+"									<div style='width:200px;height:30px;float:left;margin:18px 0 0 30px;'><span>入住时间：</span>2016-10-01</div>"+
+"									<div style='width:200px;height:30px;float:left;margin:18px 0 0 0;'><span>到期时间：</span>2016-10-07</div>"+
+"									<div style='cursor:pointer;color:#fff;width:100px;height:30px;float:right;margin:18px 0 0 0;'>明细&gt;&gt;</div>"+
+"								</div>"+
+"								<div class='detailbox_bill' style='width:98%;height:auto;background:#fff;border:1px solid #eee;margin-left:10px;border-radius:0px 0px 4px 4px;'>"+
+"									<ul class='bill_ul'>"+
+"									</ul>"+
+"								</div>"
+"							</li>";
+						$(".billhistory_info .info_ul").append(html);
+						
+						if(data.datamap.billMapList[i].order!=null){
+							var html = "<li class='roomService' style='width:100%;height:60px;background:#fff;border-bottom:1px solid #eee;'>"+
+"											<div style='width:260px;height:30px;margin-top:12px;margin-left:30px;float:left;'>"+
+"												<span style='display:inline-block;width:50px;height:30px;float:left;line-height:30px;'>费用名:</span><div style='width:auto;height:30px;float:left;line-height:30px;'>酒店住房（"+data.datamap.billMapList[i].order.roomId.roomStyle.roomStyle+")</div>"+
+"											</div>"+
+"											<div style='width:200px;height:30px;margin-top:12px;float:left;'>"+
+"												<span style='display:inline-block;width:50px;height:30px;float:left;line-height:30px;'>客房号:</span><div style='width:auto;height:30px;float:left;line-height:30px;'>"+data.datamap.billMapList[i].order.roomId.roomName+"</div>"+
+"											</div>"+
+"											<div style='width:200px;height:30px;margin-top:12px;float:left;'>"+
+"												<span style='display:inline-block;width:40px;height:30px;float:left;line-height:30px;'>状态:</span><div style='width:auto;height:30px;float:left;line-height:30px;'>"+formatOrderStatus(data.datamap.billMapList[i].order.orderStatus)+"</div>"+
+"											</div>"+
+"											<div style='width:200px;height:30px;margin-top:12px;float:left;'>"+
+"												<span style='display:inline-block;width:40px;height:30px;float:left;line-height:30px;'>费用:</span><div class='money' style='width:auto;height:30px;float:left;line-height:30px;'>"+data.datamap.billMapList[i].order.roomId.roomStyle.price+"</div>"+
+"											</div>"+
+"										</li>";
+							$(".billhistory_info .info_ul .info_li").eq(i).find(".detailbox_bill .bill_ul").append(html);
+						}
+						
+						if(data.datamap.billMapList[i].serviceOrderList.length!=0){
+							for(var j=0;j<data.datamap.billMapList[i].serviceOrderList.length;j++){
+								if((data.datamap.billMapList[i].serviceOrderList[j].serviceId.id)!="3"){
+									var html = "<li class='Service' style='width:100%;height:60px;background:#fff;border-bottom:1px solid #eee;'>"+
+		"											<div style='width:260px;height:30px;margin-top:12px;margin-left:30px;float:left;'>"+
+		"												<span style='display:inline-block;width:50px;height:30px;float:left;line-height:30px;'>费用名:</span><div style='width:auto;height:30px;float:left;line-height:30px;'>酒店消费（"+data.datamap.billMapList[i].serviceOrderList[j].serviceId.serviceType+"）</div>"+
+		"											</div>"+
+		"											<div style='width:200px;height:30px;margin-top:12px;float:left;'>"+
+		"												<span style='display:inline-block;width:40px;height:30px;float:left;line-height:30px;'>状态:</span><div style='width:auto;height:30px;float:left;line-height:30px;'>"+formatServiceStatus(data.datamap.billMapList[i].serviceOrderList[j].status)+"</div>"+
+		"											</div>"+
+		"											<div style='width:200px;height:30px;margin-top:12px;float:left;'>"+
+		"												<span style='display:inline-block;width:40px;height:30px;float:left;line-height:30px;'>费用:</span><div class='money' style='width:auto;height:30px;float:left;line-height:30px;'>"+data.datamap.billMapList[i].serviceOrderList[j].allMoney+"</div>"+
+		"											</div>"+
+		"										</li>";
+									$(".billhistory_info .info_ul .info_li").eq(i).find(".detailbox_bill .bill_ul").append(html);
+								}
+								if((data.datamap.billMapList[i].serviceOrderList[j].serviceId.id)=="3"){
+									var html = "<li class='foodService' style='width:100%;height:auto;border-bottom:1px solid #eee;'>"+
+"											<div style='width:100%;height:60px;background:#fff;'>"+
+"												<div style='width:260px;height:30px;margin-top:12px;margin-left:30px;float:left;'>"+
+"													<span style='display:inline-block;width:50px;height:30px;float:left;line-height:30px;'>费用名:</span><div style='width:auto;height:30px;float:left;line-height:30px;'>酒店消费（"+data.datamap.billMapList[i].serviceOrderList[j].serviceId.serviceType+"）</div>"+
+"												</div>"+
+"												<div style='width:200px;height:30px;margin-top:12px;float:left;'>"+
+"													<span style='display:inline-block;width:40px;height:30px;float:left;line-height:30px;'>状态:</span><div style='width:auto;height:30px;float:left;line-height:30px;'>"+formatServiceStatus(data.datamap.billMapList[i].serviceOrderList[j].status)+"</div>"+
+"												</div>"+
+"												<div style='width:200px;height:30px;margin-top:12px;float:left;'>"+
+"													<span style='display:inline-block;width:40px;height:30px;float:left;line-height:30px;'>费用:</span><div class='money' style='width:auto;height:30px;float:left;line-height:30px;'>"+data.datamap.billMapList[i].serviceOrderList[j].allMoney+"</div>"+
+"												</div>"+
+"												<div style='width:70px;height:30px;margin-top:12px;float:right;'>"+
+"													<span class='fooddetail' style='display:inline-block;width:50px;height:30px;float:left;line-height:30px;color:#25c016;cursor:pointer;'>明细&gt;&gt;</span>"+
+"												</div>"+
+"											</div>"+
+"											<div class='detailbox' style='display:none;width:99%;height:100px;margin-left:6px;'></div>"+
+"										</li>";
+									$(".billhistory_info .info_ul .info_li").eq(i).find(".detailbox_bill .bill_ul").append(html);
+									/* var status = 0;//0是关闭，1是打开
+									$(".billhistory_info .info_ul .info_li").eq(i).find(".detailbox_bill .bill_ul .fooddetail").on("click",function(){
+										if(status == 0){
+											$(".billhistory_info .info_ul .info_li").eq(i).find(".detailbox").slideDown();
+											status = 1;
+										}else if(status == 1){
+											$(".billhistory_info .info_ul .info_li").eq(i).find(".detailbox").slideUp();
+											status = 0;
+										}
+									}); */
+								}
+							}
+						}
+					}
+				}else{
+					// 没有历史账单
+					$(".billhistory_init").show();
+					showInfo("当前顾客在酒店没有历史消费记录~","warning");
+				}
+			}
+		});
 	});
 	
 	$("#s_now").click(function(){
-		window.location.href=basePath+"/toadmin/adminPage/toCheckoutCenter?id="+chooseuserid;
+		// window.location.href=basePath+"/toadmin/adminPage/toCheckoutCenter?id="+chooseuserid;
+		$(".r_init").hide();
+		$(".r_showInfo").empty();
+		$(".r_billList ul").empty();
+		$(".billhistory_info .info_ul").empty();
+		$(".r_total").empty();
+		$(".r_roommanage").hide();
+		$(".r_servicemanage").hide();
+		$(".r_billhistory").hide();
+		showData(chooseuserid);
 	});
 	
 	$("#s_add").click(function(){
@@ -1235,10 +1580,10 @@
 		$(".quitroomwindow").jqxWindow('open');
 	});
 	$("#s_change").click(function(){
-		alert(3);
+		$(".changeroomwindow").jqxWindow('open');
 	});
 	$("#s_continue").click(function(){
-		alert(4);
+		$(".continueroomwindow").jqxWindow('open');
 	});
 	$("#s_addservice").click(function(){
 		$(".addservicewindow").jqxWindow('open');

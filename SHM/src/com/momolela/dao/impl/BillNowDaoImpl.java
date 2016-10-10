@@ -8,6 +8,8 @@
  */
 package com.momolela.dao.impl;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -48,6 +50,14 @@ public class BillNowDaoImpl extends BaseDaoImpl implements IBillNowDao {
 		query.setInteger(0, billnowid);
 		billNow = (BillNow) query.uniqueResult();
 		return billNow;
+	}
+
+	public void updateBillNowByUserId(Integer userid, Date addexpiretime) {
+		String hql = "UPDATE BillNow b SET b.expiretime=? WHERE b.userid = ?";
+		Query query = getSession().createQuery(hql);
+		query.setDate(0, addexpiretime);
+		query.setInteger(1, userid);
+		query.executeUpdate();
 	}
 
 }

@@ -61,4 +61,14 @@ public class ServiceOrderDaoImpl extends BaseDaoImpl implements IServiceOrderDao
 	public void addService(ServiceOrder serviceOrder) {
 		getSession().save(serviceOrder);
 	}
+
+	public List<ServiceOrder> queryServiceOrderByBillHistoryId(
+			Integer billhistoryid) {
+		List<ServiceOrder> serviceOrderList = new ArrayList<ServiceOrder>();
+		String hql = "FROM ServiceOrder s WHERE s.billhistoryid = ?";
+		Query query = getSession().createQuery(hql);
+		query.setInteger(0, billhistoryid);
+		serviceOrderList = query.list();
+		return serviceOrderList;
+	}
 }

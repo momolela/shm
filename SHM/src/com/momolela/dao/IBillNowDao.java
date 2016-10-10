@@ -8,6 +8,8 @@
  */
 package com.momolela.dao;
 
+import java.util.Date;
+
 import com.momolela.model.BillNow;
 
 
@@ -24,4 +26,5 @@ public interface IBillNowDao {
 	void addBillNow(BillNow billNow);
 	void delBillNowByUserId(Integer userid);
 	BillNow queryBillNowById(Integer billnowid);
+	void updateBillNowByUserId(Integer userid, Date addexpiretime);
 }

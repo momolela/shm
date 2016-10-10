@@ -26,4 +26,5 @@ public interface IServiceOrderDao {
 	void updateServiceOrderByServiceOrderId(Integer serviceorderid,
 			Integer billhistoryid);
 	void addService(ServiceOrder serviceOrder);
+	List<ServiceOrder> queryServiceOrderByBillHistoryId(Integer billhistoryid);
 }
